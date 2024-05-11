@@ -1,29 +1,34 @@
 import { useEffect, useState } from "react";
-import axios from "axios"; //axios Modul für HTTP-Anfragen
 
 const Stationpage = () => {
-  const [radioList, setRadioList] = useState([]); //Zustand für die Liste der Radiosender
+  const [radioList, setRadioList] = useState([]); //useState für die Liste der Radiosender
 
   //API-Anfrage beim ersten Render
   useEffect(() => {
     //Funktion lädt die Radiosender von der API
-    async function fetchRadioList() {
+    const fetchRadioList = async () => {
       try {
         //GET-Anfrage zur API-URL, Antwort wird in response gespeichert
-        const response = await axios.get(
+        const response = await fetch(
           "http://all.api.radio-browser.info/json/servers"
         );
-        //Basis-URLs der Antort werden extrahiert und formatiert
-        const baseUrls = response.data.map(
-          (server) => "https://${server.name}"
-        );
-        //Die extrahierten URLs werden in den UseState radioList gesetzt
+        // Überprüfen, ob die Anfrage erfolgreich war
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        // JSON-Daten aus der Antwort extrahieren
+        const data = await response.json();
+
+        // Basis-URLs extrahieren und formatieren
+        const baseUrls = data.map((server) => `https://${server.name}`);
+
+        // extrahierte URLs in den useState radioList setzen
         setRadioList(baseUrls);
-      } catch (error) {
-        //Fehlerbehandlung, falls die Anfrage fehlschlägt
-        console.error("Error fetching radio list", error);
+      } catch (e) {
+        // Fehlerbehandlung, falls die Anfrage fehlschlägt
+        console.error("Error fetching radio list", e);
       }
-    }
+    };
     //Funktion zum Laden der Radiosender aufrufen
     fetchRadioList();
   }, []);

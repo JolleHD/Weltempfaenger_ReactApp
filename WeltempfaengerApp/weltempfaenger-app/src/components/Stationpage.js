@@ -1,48 +1,93 @@
 import { useEffect, useState } from "react";
 
 const Stationpage = () => {
-  const [radioList, setRadioList] = useState([]); //useState für die Liste der Radiosender
+  const [radioStations, setRadioStations] = useState([]); //useState für die Liste der Radiosender
+  const [loading, setLoading] = useState(true); // Zustand für Ladeanzeige
 
   //API-Anfrage beim ersten Render
   useEffect(() => {
-    //Funktion lädt die Radiosender von der API
-    const fetchRadioList = async () => {
+    const fetchRadioStations = async () => {
       try {
-        //GET-Anfrage zur API-URL, Antwort wird in response gespeichert
-        const response = await fetch(
-          "http://all.api.radio-browser.info/json/servers"
-        );
+        // Zufällige Basis-URL des Radioservers abrufen
+        const randomBaseUrl = await getRadiobrowserBaseUrlRandom();
+
+        // Konfiguration des ausgewählten Servers abrufen
+        const config = await getRadiobrowserServerConfig(randomBaseUrl);
+
+        // Liste der verfügbaren Sender abrufen
+        const stationResponse = await fetch(`${randomBaseUrl}/json/stations`);
+
         // Überprüfen, ob die Anfrage erfolgreich war
-        if (!response.ok) {
+        if (!stationResponse.ok) {
           throw new Error("Network response was not ok");
         }
+
         // JSON-Daten aus der Antwort extrahieren
-        const data = await response.json();
+        const stationData = await stationResponse.json();
 
-        // Basis-URLs extrahieren und formatieren
-        const baseUrls = data.map((server) => `https://${server.name}`);
+        // Begrenze die Anzahl der Radiosender auf 10
+        const limitedStations = stationData.slice(0, 10);
 
-        // extrahierte URLs in den useState radioList setzen
-        setRadioList(baseUrls);
-      } catch (e) {
-        // Fehlerbehandlung, falls die Anfrage fehlschlägt
-        console.error("Error fetching radio list", e);
+        // Liste der Radiosender in den useState setzen
+        setRadioStations(limitedStations);
+        setLoading(false); // Ladeanzeige ausblenden, wenn Daten geladen sind
+      } catch (error) {
+        console.error("Error fetching radio stations", error);
+        setLoading(false); // Ladeanzeige ausblenden, wenn ein Fehler auftritt
       }
     };
-    //Funktion zum Laden der Radiosender aufrufen
-    fetchRadioList();
+
+    // Funktion zum Laden der Radiosender aufrufen
+    fetchRadioStations();
   }, []);
+
+  // Funktion, um eine zufällige Basis-URL des Radioservers abzurufen
+  async function getRadiobrowserBaseUrlRandom() {
+    //Fetch zur API-URL, Antwort wird in response gespeichert
+    const response = await fetch(
+      "http://all.api.radio-browser.info/json/servers"
+    );
+
+    // Überprüfen, ob die Anfrage erfolgreich war
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    // JSON-Daten aus der Antwort extrahieren
+    const data = await response.json();
+
+    // Basis-URLs extrahieren und formatieren
+    const hosts = data.map((server) => `https://${server.name}`);
+    return hosts[Math.floor(Math.random() * hosts.length)];
+  }
+
+  // Funktion, um die Konfiguration des Radioservers abzurufen
+  async function getRadiobrowserServerConfig(baseurl) {
+    const response = await fetch(`${baseurl}/json/config`);
+
+    // Überprüfen, ob die Anfrage erfolgreich war
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    // JSON-Daten aus der Antwort extrahieren und zurückgeben
+    return await response.json();
+  }
 
   return (
     <div>
       <h1>List of Radio Stations</h1>
-      <ul>
-        {radioList.map((url, index) => (
-          <li key={index}>
-            <a href={url}>{url}</a>
-          </li>
-        ))}
-      </ul>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {radioStations.map((station, index) => (
+            <li key={index}>
+              <a href={station.url}>{station.name}</a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

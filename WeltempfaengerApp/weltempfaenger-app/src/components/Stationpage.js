@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Stationpage = () => {
   const [radioStations, setRadioStations] = useState([]); //useState für die Liste der Radiosender
   const [loading, setLoading] = useState(true); // Zustand für Ladeanzeige
+  const [searchTerm, setSearchTerm] = useState(""); //Zustand für Suchbegriff
+
+  const inputRef = useRef(null); //Referenz auf das InputField für den Namen
 
   //API-Anfrage beim ersten Render
   useEffect(() => {
@@ -24,12 +27,10 @@ const Stationpage = () => {
 
         // JSON-Daten aus der Antwort extrahieren
         const stationData = await stationResponse.json();
-
-        // Begrenze die Anzahl der Radiosender auf 10
-        const limitedStations = stationData.slice(0, 10);
+        console.log(stationData);
 
         // Liste der Radiosender in den useState setzen
-        setRadioStations(limitedStations);
+        setRadioStations(stationData);
         setLoading(false); // Ladeanzeige ausblenden, wenn Daten geladen sind
       } catch (error) {
         console.error("Error fetching radio stations", error);
@@ -74,14 +75,27 @@ const Stationpage = () => {
     return await response.json();
   }
 
+  //Funktion zum Filtern der Sender nach Namen
+  const filteredStations = radioStations.filter((station) =>
+    station.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <h1>List of Radio Stations</h1>
+      <input
+        type="text"
+        placeholder="Sendername"
+        ref={inputRef}
+        onChange={() => {
+          setSearchTerm(inputRef.current.value);
+        }}
+      ></input>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <ul>
-          {radioStations.map((station, index) => (
+          {filteredStations.map((station, index) => (
             <li key={index}>
               <a href={station.url}>{station.name}</a>
             </li>

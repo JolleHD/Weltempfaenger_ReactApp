@@ -3,9 +3,18 @@ import { useEffect, useState, useRef } from "react";
 const Stationpage = () => {
   const [radioStations, setRadioStations] = useState([]); //useState für die Liste der Radiosender
   const [loading, setLoading] = useState(true); // Zustand für Ladeanzeige
-  const [searchTerm, setSearchTerm] = useState(""); //Zustand für Suchbegriff
 
-  const inputRef = useRef(null); //Referenz auf das InputField für den Namen
+  const [filter, setFilter] = useState({
+    countrycode: "",
+    language: "",
+    tags: "",
+  }); //Zustand für das Filterobjekt
+
+  const inputRefs = {
+    countrycode: useRef(null),
+    language: useRef(null),
+    tags: useRef(null),
+  }; //Referenzen auf die Input-Fields
 
   //API-Anfrage beim ersten Render
   useEffect(() => {
@@ -27,7 +36,7 @@ const Stationpage = () => {
 
         // JSON-Daten aus der Antwort extrahieren
         const stationData = await stationResponse.json();
-        console.log(stationData);
+        //console.log(stationData);
 
         // Liste der Radiosender in den useState setzen
         setRadioStations(stationData);
@@ -76,20 +85,49 @@ const Stationpage = () => {
   }
 
   //Funktion zum Filtern der Sender nach Namen
-  const filteredStations = radioStations.filter((station) =>
+  /*const filteredStations = radioStations.filter((station) =>
     station.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  );*/
+
+  //Funktion zum Aktualisieren des Filterobjekts - wird aufgerufen, wenn sich der Wert eines der Eingabefelder ändert
+  const handleInputChange = (filterKey) => {
+    setFilter({
+      ...filter, //Bestehendes Filterobjekt wird kopiert
+      [filterKey]: inputRefs[filterKey].current.value, //Der spezifische Filter wird aktualisiert
+    });
+  };
+
+  //Funktion zum Filtern der Sender basierend auf dem Filterobjekt
+  const filteredStations = radioStations.filter((station) => {
+    //.filter()-Methode erstellt ein neues Array, das nur die Sender enthält, die die angegebenen Bedingungen erfüllen
+    const matchesCountrycode =
+      filter.countrycode === "" || station.countrycode === filter.countrycode; //Prüft, ob Countrycode-Feld leer (Sender auch anzeigen, wenn kein Filter gesetzt ist) ist oder mit station.countrycode übereinstimmt
+    const matchesLanguage =
+      filter.language === "" || station.language === filter.language; //Prüft, ob language-Feld leer ist oder mit station.language übereinstimmt
+    const matchesTag = filter.tags === "" || station.tags.includes(filter.tags); //Prüft, ob tags-Feld leer ist oder mit station.tags übereinstimmt
+    return matchesCountrycode && matchesLanguage && matchesTag; //Kombiniert die Filter -> Es werden nur die Sender genommen, zu denen alle Filter übereinstimmen
+  });
 
   return (
     <div>
       <h1>List of Radio Stations</h1>
       <input
         type="text"
-        placeholder="Sendername"
-        ref={inputRef}
-        onChange={() => {
-          setSearchTerm(inputRef.current.value);
-        }}
+        placeholder="Countrycode"
+        ref={inputRefs.countrycode}
+        onChange={() => handleInputChange("countrycode")}
+      ></input>
+      <input
+        type="text"
+        placeholder="Language"
+        ref={inputRefs.language}
+        onChange={() => handleInputChange("language")}
+      ></input>
+      <input
+        type="text"
+        placeholder="Tag"
+        ref={inputRefs.tags}
+        onChange={() => handleInputChange("tags")}
       ></input>
       {loading ? (
         <p>Loading...</p>

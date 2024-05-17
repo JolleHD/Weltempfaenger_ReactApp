@@ -1,23 +1,26 @@
 import React from "react"; 
+import { MapContainer,
+  TileLayer, Marker, Popup } from 'react-leaflet';
+
 const MapApi = () => {
-    const [currentStation, setCurrentStation] = useState(null);
+
+  return(
+
+    <div>
+
+
+      <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '200px', width: '100%' }}>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>  
+        <Marker position={[51.505, -0.09]}>
+          <Popup>
+            Beispielmarker <br /> Einfache Popup-Nachricht.
+          </Popup>
+        </Marker>
+     </MapContainer> 
+      
+    </div>
+  )
+ 
   
-    const stations = [
-      {
-        id: 1,
-        name: '1Live',
-        lat: 51.2266,
-        lng: 6.7782,
-        url: 'https://wdr-1live-live.icecast.wdr.de/wdr/1live/live/mp3/128/stream.mp3',
-      },
-      {
-        id: 2,
-        name: 'Radio Rur',
-        lat: 50.8072,
-        lng: 6.2824,
-        url: 'http://streams.radiork.de/radiorur',
-      },
-      // Weitere Stationen mit Koordinaten
-    ];
-  
-  
+}
+export default MapApi;

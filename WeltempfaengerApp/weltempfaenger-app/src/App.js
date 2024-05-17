@@ -1,12 +1,16 @@
 import React from "react";
 import "./App.css";
+import MapApi from "./Weltkarte/MapApi";
+import RadioMap from "./Weltkarte/RadioMap";
 
 function App() { 
-  const title = "React";
+  
   return (
 
     <div>
-      <h1 className="App">Hello {title}</h1>
+      <MapApi />
+      
+      
       
     </div>
   )

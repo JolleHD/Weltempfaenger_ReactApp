@@ -1,8 +1,9 @@
 import React from "react"; 
 import { MapContainer,
   TileLayer, Marker, Popup } from 'react-leaflet';
+  
 // src/api/radio.js
-import axios from 'axios';
+/*import axios from 'axios';
 
 export const fetchRadioStations = async () => {
   try {
@@ -12,10 +13,10 @@ export const fetchRadioStations = async () => {
     console.error('Error fetching radio stations:', error);
     return [];
   }
-};
+};*/
 
 
-/*const MapApi = () => {
+const MapApi = () => {
 
   return(
 
@@ -35,5 +36,5 @@ export const fetchRadioStations = async () => {
   )
  
   
-}*/
+}
 export default MapApi;

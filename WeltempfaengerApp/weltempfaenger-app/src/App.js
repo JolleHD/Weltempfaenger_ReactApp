@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import MapApi from "./Weltkarte/MapApi";
-import RadioMapApi from "./Weltkarte/RadioMapApi";
 
 function App() { 
   
@@ -9,7 +8,9 @@ function App() {
 
     <div>
       <MapApi />
-         
+      
+      
+      
       
     </div>
   )

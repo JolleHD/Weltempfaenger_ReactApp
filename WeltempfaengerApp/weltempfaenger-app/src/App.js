@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
-import MapApi from "./Weltkarte/MapApi";
+import Weltkarte from "./Weltkarte/Weltkarte"
 
 function App() { 
   
   return (
 
     <div>
-      <MapApi />
+      <Weltkarte />
       
       
       

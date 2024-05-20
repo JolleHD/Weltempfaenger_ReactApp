@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Weltkarte from "./Weltkarte/Weltkarte"
 import Radio from "./Weltkarte/Radio";
+import RadioKarte from "./Weltkarte/RadioKarte";
 
 function App() { 
   
@@ -9,12 +10,10 @@ function App() {
 
     <div>
       
-      <Weltkarte />
       
+      <RadioKarte />
 
-      
-      
-      
+        
     </div>
   )
 }

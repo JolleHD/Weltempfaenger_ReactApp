@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-import Weltkarte from "./Weltkarte/Weltkarte"
-import Radio from "./Weltkarte/Radio";
+//import Weltkarte from "./Weltkarte/Weltkarte"
 import RadioKarte from "./Weltkarte/RadioKarte";
 
 function App() { 

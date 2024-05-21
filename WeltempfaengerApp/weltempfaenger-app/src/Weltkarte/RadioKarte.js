@@ -11,7 +11,7 @@ L.Icon.Default.mergeOptions({
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
-
+//Radio-browser Api nutzt
 const RadioKarte = () => {
   const [stations, setStations] = useState([]);
 
@@ -31,7 +31,7 @@ const RadioKarte = () => {
 
     fetchRadioStations();
   }, []);
-
+//Leaflet Map 
   return (
     <MapContainer center={[0, 0]} zoom={2} style={{ height: '100vh', width: '100%' }}>
       <TileLayer

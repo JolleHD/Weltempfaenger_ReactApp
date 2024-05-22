@@ -9,6 +9,7 @@ const Stationpage = () => {
     tags: "",
   }); // Zustand für das Filterobjekt
   const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
+  const [currentStationUrl, setCurrentStationUrl] = useState(""); // URL des aktuellen Radiosenders
 
   const inputRefs = {
     countrycode: useRef(null),
@@ -29,6 +30,10 @@ const Stationpage = () => {
       [filterKey]: inputRefs[filterKey].current.value, // Der spezifische Filter wird aktualisiert
     });
     setVisibleCount(100);
+  };
+
+  const handleStationClick = (url) => {
+    setCurrentStationUrl(url); // Setze die URL des aktuellen Radiosenders
   };
 
   // Funktion zum Filtern der Sender basierend auf dem Filterobjekt
@@ -80,13 +85,23 @@ const Stationpage = () => {
           <ul>
             {filteredStations.slice(0, visibleCount).map((station, index) => (
               <li key={index}>
-                <a href={station.url}>{station.name}</a>
+                <button onClick={() => handleStationClick(station.url)}>
+                  {station.name}
+                </button>
               </li>
             ))}
           </ul>
           {visibleCount < filteredStations.length && (
             <button onClick={loadMoreStations}>Load More</button>
           )}
+        </div>
+      )}
+      {currentStationUrl && (
+        <div>
+          <h2>Now Playing</h2>
+          <audio controls src={currentStationUrl} autoPlay>
+            Your browser does not support the audio element.
+          </audio>
         </div>
       )}
     </div>

@@ -55,55 +55,73 @@ const Stationpage = () => {
     setVisibleCount((prevCount) => prevCount + 100); // Anzahl der sichtbaren Sender um 100 erhöhen
   };
 
-  return (
-    <div>
-      <h1>List of Radio Stations</h1>
-      <input
-        type="text"
-        placeholder="Countrycode"
-        ref={inputRefs.countrycode}
-        onChange={() => handleInputChange("countrycode")}
-      ></input>
-      <input
-        type="text"
-        placeholder="Language"
-        ref={inputRefs.language}
-        onChange={() => handleInputChange("language")}
-      ></input>
-      <input
-        type="text"
-        placeholder="Tag"
-        ref={inputRefs.tags}
-        onChange={() => handleInputChange("tags")}
-      ></input>
-      {isError ? (
-        <p>{error.message}</p>
-      ) : isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <ul>
-            {filteredStations.slice(0, visibleCount).map((station, index) => (
-              <li key={index}>
-                <button onClick={() => handleStationClick(station.url)}>
-                  {station.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-          {visibleCount < filteredStations.length && (
-            <button onClick={loadMoreStations}>Load More</button>
-          )}
-        </div>
-      )}
+  return ( 
+    <div> 
+      <style jsx>{`
+        /* Muss noch in extra CSS Datei, am besten Komponente noch weiter aufteilen */ 
+        .fixed-player {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background-color: #fff; /* Hintergrundfarbe, um den Player hervorzuheben */
+          z-index: 1000; /* Stellt sicher, dass der Player über anderen Elementen liegt */
+          padding: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+          margin-bottom: 200px; /* Platz für den fest fixierten Player */
+        }
+      `}</style>
       {currentStationUrl && (
-        <div>
+        <div className="fixed-player">
           <h2>Now Playing</h2>
           <audio controls src={currentStationUrl} autoPlay>
             Your browser does not support the audio element.
           </audio>
         </div>
       )}
+      <div className="content">
+        <h1>List of Radio Stations</h1>
+        <input
+          type="text"
+          placeholder="Countrycode"
+          ref={inputRefs.countrycode}
+          onChange={() => handleInputChange("countrycode")}
+        ></input>
+        <input
+          type="text"
+          placeholder="Language"
+          ref={inputRefs.language}
+          onChange={() => handleInputChange("language")}
+        ></input>
+        <input
+          type="text"
+          placeholder="Tag"
+          ref={inputRefs.tags}
+          onChange={() => handleInputChange("tags")}
+        ></input>
+        {isError ? (
+          <p>{error.message}</p>
+        ) : isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <ul>
+              {filteredStations.slice(0, visibleCount).map((station, index) => (
+                <li key={index}>
+                  <button onClick={() => handleStationClick(station.url)}>
+                    {station.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            {visibleCount < filteredStations.length && (
+              <button onClick={loadMoreStations}>Load More</button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

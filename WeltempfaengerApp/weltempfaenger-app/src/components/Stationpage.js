@@ -3,7 +3,6 @@ import { QueryClient, useQuery } from "@tanstack/react-query";
 import fetchStations from "../fetchers/fetchStations.js";
 
 const Stationpage = () => {
-  const [radioStations, setRadioStations] = useState([]); // useState für die Liste der Radiosender
   const [filter, setFilter] = useState({
     countrycode: "",
     language: "",
@@ -22,21 +21,6 @@ const Stationpage = () => {
     staleTime: Infinity,
   }); //useQuery für fetch
 
-  // Set the fetched data to radioStations when data is available
-  useEffect(() => {
-    if (isSuccess && data) {
-      setRadioStations(data);
-    }
-  }, [isSuccess, data]);
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (isError) {
-    return <div>Error...</div>;
-  }
-
   // Funktion zum Aktualisieren des Filterobjekts - wird aufgerufen, wenn sich der Wert eines der Eingabefelder ändert
   const handleInputChange = (filterKey) => {
     setFilter({
@@ -46,15 +30,19 @@ const Stationpage = () => {
   };
 
   // Funktion zum Filtern der Sender basierend auf dem Filterobjekt
-  const filteredStations = radioStations.filter((station) => {
-    // .filter()-Methode erstellt ein neues Array, das nur die Sender enthält, die die angegebenen Bedingungen erfüllen
-    const matchesCountrycode =
-      filter.countrycode === "" || station.countrycode === filter.countrycode; // Prüft, ob Countrycode-Feld leer (Sender auch anzeigen, wenn kein Filter gesetzt ist) ist oder mit station.countrycode übereinstimmt
-    const matchesLanguage =
-      filter.language === "" || station.language === filter.language; // Prüft, ob language-Feld leer ist oder mit station.language übereinstimmt
-    const matchesTag = filter.tags === "" || station.tags.includes(filter.tags); // Prüft, ob tags-Feld leer ist oder mit station.tags übereinstimmt
-    return matchesCountrycode && matchesLanguage && matchesTag; // Kombiniert die Filter -> Es werden nur die Sender genommen, zu denen alle Filter übereinstimmen
-  });
+  const filteredStations = data
+    ? data.filter((station) => {
+        // .filter()-Methode erstellt ein neues Array, das nur die Sender enthält, die die angegebenen Bedingungen erfüllen
+        const matchesCountrycode =
+          filter.countrycode === "" ||
+          station.countrycode === filter.countrycode; // Prüft, ob Countrycode-Feld leer (Sender auch anzeigen, wenn kein Filter gesetzt ist) ist oder mit station.countrycode übereinstimmt
+        const matchesLanguage =
+          filter.language === "" || station.language === filter.language; // Prüft, ob language-Feld leer ist oder mit station.language übereinstimmt
+        const matchesTag =
+          filter.tags === "" || station.tags.includes(filter.tags); // Prüft, ob tags-Feld leer ist oder mit station.tags übereinstimmt
+        return matchesCountrycode && matchesLanguage && matchesTag; // Kombiniert die Filter -> Es werden nur die Sender genommen, zu denen alle Filter übereinstimmen
+      })
+    : [];
 
   return (
     <div>
@@ -78,7 +66,7 @@ const Stationpage = () => {
         onChange={() => handleInputChange("tags")}
       ></input>
       {isError ? (
-        <p>{isError}</p>
+        <p>{error.message}</p>
       ) : isLoading ? (
         <p>Loading...</p>
       ) : (

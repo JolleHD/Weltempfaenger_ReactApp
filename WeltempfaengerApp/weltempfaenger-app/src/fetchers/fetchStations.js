@@ -1,6 +1,5 @@
 const fetchStations = async () => {
-  console.log("Test");
-
+  console.log("Fetching stations...");
   // Zufällige Basis-URL des Radioservers abrufen
   const randomBaseUrl = await getRadiobrowserBaseUrlRandom();
 

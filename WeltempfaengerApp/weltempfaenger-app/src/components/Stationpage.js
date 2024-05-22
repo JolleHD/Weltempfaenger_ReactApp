@@ -8,6 +8,7 @@ const Stationpage = () => {
     language: "",
     tags: "",
   }); // Zustand für das Filterobjekt
+  const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
 
   const inputRefs = {
     countrycode: useRef(null),
@@ -27,6 +28,7 @@ const Stationpage = () => {
       ...filter, // Bestehendes Filterobjekt wird kopiert
       [filterKey]: inputRefs[filterKey].current.value, // Der spezifische Filter wird aktualisiert
     });
+    setVisibleCount(100);
   };
 
   // Funktion zum Filtern der Sender basierend auf dem Filterobjekt
@@ -43,6 +45,10 @@ const Stationpage = () => {
         return matchesCountrycode && matchesLanguage && matchesTag; // Kombiniert die Filter -> Es werden nur die Sender genommen, zu denen alle Filter übereinstimmen
       })
     : [];
+
+  const loadMoreStations = () => {
+    setVisibleCount((prevCount) => prevCount + 100); // Anzahl der sichtbaren Sender um 100 erhöhen
+  };
 
   return (
     <div>
@@ -70,13 +76,18 @@ const Stationpage = () => {
       ) : isLoading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
-          {filteredStations.map((station, index) => (
-            <li key={index}>
-              <a href={station.url}>{station.name}</a>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <ul>
+            {filteredStations.slice(0, visibleCount).map((station, index) => (
+              <li key={index}>
+                <a href={station.url}>{station.name}</a>
+              </li>
+            ))}
+          </ul>
+          {visibleCount < filteredStations.length && (
+            <button onClick={loadMoreStations}>Load More</button>
+          )}
+        </div>
       )}
     </div>
   );

@@ -9,6 +9,7 @@ const Stationpage = () => {
     tags: "",
   }); // Zustand für das Filterobjekt
   const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
+  const [currentStation, setCurrentStation] = useState(null); // aktueller Sender
   const [currentStationUrl, setCurrentStationUrl] = useState(""); // URL des aktuellen Radiosenders
 
   const inputRefs = {
@@ -32,8 +33,9 @@ const Stationpage = () => {
     setVisibleCount(100);
   };
 
-  const handleStationClick = (url) => {
-    setCurrentStationUrl(url); // Setze die URL des aktuellen Radiosenders
+  const handleStationClick = (station) => {
+    setCurrentStation(station); //Setze aktuellen Sender
+    setCurrentStationUrl(station.url); // Setze die URL des aktuellen Radiosenders
   };
 
   // Funktion zum Filtern der Sender basierend auf dem Filterobjekt
@@ -55,10 +57,10 @@ const Stationpage = () => {
     setVisibleCount((prevCount) => prevCount + 100); // Anzahl der sichtbaren Sender um 100 erhöhen
   };
 
-  return ( 
-    <div> 
+  return (
+    <div>
       <style jsx>{`
-        /* Muss noch in extra CSS Datei, am besten Komponente noch weiter aufteilen */ 
+        /* Muss noch in extra CSS Datei, am besten Komponente noch weiter aufteilen */
         .fixed-player {
           position: fixed;
           bottom: 0;
@@ -75,7 +77,7 @@ const Stationpage = () => {
       `}</style>
       {currentStationUrl && (
         <div className="fixed-player">
-          <h2>Now Playing</h2>
+          <h2>Now Playing: {currentStation.name}</h2>
           <audio controls src={currentStationUrl} autoPlay>
             Your browser does not support the audio element.
           </audio>
@@ -110,7 +112,7 @@ const Stationpage = () => {
             <ul>
               {filteredStations.slice(0, visibleCount).map((station, index) => (
                 <li key={index}>
-                  <button onClick={() => handleStationClick(station.url)}>
+                  <button onClick={() => handleStationClick(station)}>
                     {station.name}
                   </button>
                 </li>

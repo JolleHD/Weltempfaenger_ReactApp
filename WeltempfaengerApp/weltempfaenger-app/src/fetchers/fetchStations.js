@@ -4,7 +4,7 @@ const fetchStations = async () => {
   //const randomBaseUrl = await getRadiobrowserBaseUrlRandom();
 
   // Konfiguration des ausgewählten Servers abrufen
-  const config = await getRadiobrowserServerConfig(randomBaseUrl);
+  //const config = await getRadiobrowserServerConfig(randomBaseUrl);
 
   // Liste der verfügbaren Sender abrufen
   const stationResponse = await fetch(

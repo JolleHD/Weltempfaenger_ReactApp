@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { useRadio } from "../context/RadioContext";
 
 // Fix the default icon issue with Leaflet in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -16,26 +17,16 @@ L.Icon.Default.mergeOptions({
 });
 //Radio-browser Api nutzt
 const RadioKarte = () => {
-  const [stations, setStations] = useState([]);
+  const {
+    isError,
+    isSuccess,
+    isLoading,
+    data,
+    error,
+    currentStation,
+    setCurrentStation,
+  } = useRadio();
 
-  useEffect(() => {
-    const fetchRadioStations = async () => {
-      try {
-        const response = await fetch(
-          "https://de1.api.radio-browser.info/json/stations"
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setStations(data);
-      } catch (error) {
-        console.error("Error fetching radio stations:", error);
-      }
-    };
-
-    fetchRadioStations();
-  }, []);
   //Leaflet Map
   return (
     <div>
@@ -48,12 +39,12 @@ const RadioKarte = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
         />
-        {stations.map(
+        {data.map(
           (station) =>
             station.geo_lat &&
             station.geo_long && (
               <Marker
-                key={station.id}
+                key={station.stationuuid}
                 position={[station.geo_lat, station.geo_long]}
               >
                 <Popup>
@@ -62,6 +53,10 @@ const RadioKarte = () => {
                     <p>{station.country}</p>
                     <p>{station.state}</p>
                     <p>{station.tags}</p>
+                    <br />
+                    <button onClick={() => setCurrentStation(station)}>
+                      Play
+                    </button>
                     <a
                       href={station.url}
                       target="_blank"

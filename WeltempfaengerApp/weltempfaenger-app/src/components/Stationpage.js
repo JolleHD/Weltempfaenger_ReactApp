@@ -1,27 +1,28 @@
-import { useEffect, useState, useRef } from "react";
-import { QueryClient, useQuery } from "@tanstack/react-query";
-import fetchStations from "../fetchers/fetchStations.js";
+import { useState, useRef } from "react";
+import { useRadio } from "../context/RadioContext";
 
 const Stationpage = () => {
+  const {
+    isError,
+    isSuccess,
+    isLoading,
+    data,
+    error,
+    currentStation,
+    setCurrentStation,
+  } = useRadio();
   const [filter, setFilter] = useState({
     countrycode: "",
     language: "",
     tags: "",
   }); // Zustand für das Filterobjekt
   const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
-  const [currentStation, setCurrentStation] = useState(null); // aktueller Sender
 
   const inputRefs = {
     countrycode: useRef(null),
     language: useRef(null),
     tags: useRef(null),
   }; // Referenzen auf die Input-Fields
-
-  const { isError, isSuccess, isLoading, data, error } = useQuery({
-    queryKey: ["stations"],
-    queryFn: fetchStations,
-    staleTime: Infinity,
-  }); //useQuery für fetch
 
   // Funktion zum Aktualisieren des Filterobjekts - wird aufgerufen, wenn sich der Wert eines der Eingabefelder ändert
   const handleInputChange = (filterKey) => {

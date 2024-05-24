@@ -2,6 +2,7 @@ import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Stationpage from "./components/Stationpage";
+import RadioKarte from "./components/RadioKarte";
 import { useState } from "react";
 
 // Erstelle eine Instanz des QueryClient
@@ -22,7 +23,7 @@ function App() {
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <button onClick={() => setShowPage(!showPage)}>Toggle Page</button>
-        {showPage && <Stationpage />}
+        {showPage && <RadioKarte />}
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </div>

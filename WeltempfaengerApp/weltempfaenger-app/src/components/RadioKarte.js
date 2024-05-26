@@ -1,8 +1,11 @@
 // src/RadioKarte.js
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import MarkerClusterGroup from "react-leaflet-markercluster";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { useRadio } from "../context/RadioContext";
 
 // Fix the default icon issue with Leaflet in React
@@ -15,7 +18,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl:
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
-//Radio-browser Api nutzt
+
 const RadioKarte = () => {
   const {
     isError,
@@ -26,6 +29,9 @@ const RadioKarte = () => {
     currentStation,
     setCurrentStation,
   } = useRadio();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>{error.message}</p>;
 
   //Leaflet Map
   return (
@@ -39,36 +45,38 @@ const RadioKarte = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
         />
-        {data.map(
-          (station) =>
-            station.geo_lat &&
-            station.geo_long && (
-              <Marker
-                key={station.stationuuid}
-                position={[station.geo_lat, station.geo_long]}
-              >
-                <Popup>
-                  <div>
-                    <h3>{station.name}</h3>
-                    <p>{station.country}</p>
-                    <p>{station.state}</p>
-                    <p>{station.tags}</p>
-                    <br />
-                    <button onClick={() => setCurrentStation(station)}>
-                      Play
-                    </button>
-                    <a
-                      href={station.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Listen
-                    </a>
-                  </div>
-                </Popup>
-              </Marker>
-            )
-        )}
+        <MarkerClusterGroup>
+          {data.map(
+            (station) =>
+              station.geo_lat &&
+              station.geo_long && (
+                <Marker
+                  key={station.stationuuid}
+                  position={[station.geo_lat, station.geo_long]}
+                >
+                  <Popup>
+                    <div>
+                      <h3>{station.name}</h3>
+                      <p>{station.country}</p>
+                      <p>{station.state}</p>
+                      <p>{station.tags}</p>
+                      <br />
+                      <button onClick={() => setCurrentStation(station)}>
+                        Play
+                      </button>
+                      <a
+                        href={station.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Listen
+                      </a>
+                    </div>
+                  </Popup>
+                </Marker>
+              )
+          )}
+        </MarkerClusterGroup>
       </MapContainer>
     </div>
   );

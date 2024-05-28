@@ -20,15 +20,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const RadioKarte = () => {
-  const {
-    isError,
-    isSuccess,
-    isLoading,
-    data,
-    error,
-    currentStation,
-    setCurrentStation,
-  } = useRadio();
+  const { isError, isLoading, data, error, setCurrentStation } = useRadio();
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>{error.message}</p>;

@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Stationpage from "./components/Stationpage";
 import RadioKarte from "./components/RadioKarte";
-import { useState } from "react";
 import { RadioProvider } from "./context/RadioContext";
 
 // Erstelle eine Instanz des QueryClient
@@ -18,8 +17,6 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const [showPage, setShowPage] = useState(true);
-
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>

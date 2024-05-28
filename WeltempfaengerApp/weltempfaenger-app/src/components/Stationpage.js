@@ -2,15 +2,8 @@ import { useState, useRef } from "react";
 import { useRadio } from "../context/RadioContext";
 
 const Stationpage = () => {
-  const {
-    isError,
-    isSuccess,
-    isLoading,
-    data,
-    error,
-    currentStation,
-    setCurrentStation,
-  } = useRadio();
+  const { isError, isLoading, data, error, currentStation, setCurrentStation } =
+    useRadio();
   const [filter, setFilter] = useState({
     countrycode: "",
     language: "",

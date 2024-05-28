@@ -1,13 +1,16 @@
 const fetchStations = async () => {
   console.log("Fetching stations...");
   // Zufällige Basis-URL des Radioservers abrufen
-  const randomBaseUrl = await getRadiobrowserBaseUrlRandom();
+  //const randomBaseUrl = await getRadiobrowserBaseUrlRandom();
 
   // Konfiguration des ausgewählten Servers abrufen
-  const config = await getRadiobrowserServerConfig(randomBaseUrl);
+  //const config = await getRadiobrowserServerConfig(randomBaseUrl);
 
   // Liste der verfügbaren Sender abrufen
-  const stationResponse = await fetch(`${randomBaseUrl}/json/stations`);
+  //const stationResponse = await fetch(`${randomBaseUrl}/json/stations`);
+  const stationResponse = await fetch(
+    `https://de1.api.radio-browser.info/json/stations`
+  );
 
   // Überprüfen, ob die Anfrage erfolgreich war
   if (!stationResponse.ok) {

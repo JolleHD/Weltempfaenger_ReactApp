@@ -24,8 +24,8 @@ function App() {
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <RadioProvider>
-          <Stationpage />
           <RadioKarte />
+          <Stationpage />
         </RadioProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

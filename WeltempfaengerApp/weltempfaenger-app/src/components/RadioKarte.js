@@ -53,6 +53,11 @@ const RadioKarte = () => {
                 <Marker
                   key={station.stationuuid}
                   position={[station.geo_lat, station.geo_long]}
+                  eventHandlers={{
+                    click: () => {
+                      setCurrentStation(station);
+                    },
+                  }}
                 >
                   <Popup>
                     <div>
@@ -60,17 +65,6 @@ const RadioKarte = () => {
                       <p>{station.country}</p>
                       <p>{station.state}</p>
                       <p>{station.tags}</p>
-                      <br />
-                      <button onClick={() => setCurrentStation(station)}>
-                        Play
-                      </button>
-                      <a
-                        href={station.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Listen
-                      </a>
                     </div>
                   </Popup>
                 </Marker>

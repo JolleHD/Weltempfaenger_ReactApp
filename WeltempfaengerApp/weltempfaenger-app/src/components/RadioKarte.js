@@ -3,7 +3,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import MarkerClusterGroup from "react-leaflet-markercluster";
+import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { useRadio } from "../context/RadioContext";

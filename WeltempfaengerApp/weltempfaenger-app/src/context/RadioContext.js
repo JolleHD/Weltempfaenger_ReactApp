@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchStations from "../fetchers/fetchStations.js";
 
-const RadioContext = createContext(); //
+const RadioContext = createContext(); //Context um die Daten vom Radiofetch für alle Komponenten die es benötigen zur Verfügung zu stellen
 
 export const RadioProvider = ({ children }) => {
   const { isError, isSuccess, isLoading, data, error } = useQuery({

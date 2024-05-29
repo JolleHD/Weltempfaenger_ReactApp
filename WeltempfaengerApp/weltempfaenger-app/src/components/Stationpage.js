@@ -3,13 +3,17 @@ import { useRadio } from "../context/RadioContext";
 import { countries, languages, tags } from "../utils/filter";
 
 const Stationpage = () => {
-  const { isError, isLoading, data, error, currentStation, setCurrentStation } =
-    useRadio();
-  const [filter, setFilter] = useState({
-    countrycode: "",
-    language: "",
-    tags: "",
-  }); // Zustand für das Filterobjekt
+  const {
+    isError,
+    isLoading,
+    error,
+    currentStation,
+    setCurrentStation,
+    filter,
+    setFilter,
+    filteredStations,
+  } = useRadio();
+
   const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
 
   const handleSelectChange = (event, filterKey) => {
@@ -18,26 +22,11 @@ const Stationpage = () => {
       [filterKey]: event.target.value,
     });
     setVisibleCount(100);
-  };
+  }; // Aktualisiert bei Änderungen der Filter die passenden Stationen
 
   const handleStationClick = (station) => {
     setCurrentStation(station); //Setze aktuellen Sender
   };
-
-  // Funktion zum Filtern der Sender basierend auf dem Filterobjekt
-  const filteredStations = data
-    ? data.filter((station) => {
-        // .filter()-Methode erstellt ein neues Array, das nur die Sender enthält, die die angegebenen Bedingungen erfüllen
-        const matchesCountrycode =
-          filter.countrycode === "" ||
-          station.countrycode === filter.countrycode; // Prüft, ob Countrycode-Feld leer (Sender auch anzeigen, wenn kein Filter gesetzt ist) ist oder mit station.countrycode übereinstimmt
-        const matchesLanguage =
-          filter.language === "" || station.language === filter.language; // Prüft, ob language-Feld leer ist oder mit station.language übereinstimmt
-        const matchesTag =
-          filter.tags === "" || station.tags.includes(filter.tags); // Prüft, ob tags-Feld leer ist oder mit station.tags übereinstimmt
-        return matchesCountrycode && matchesLanguage && matchesTag; // Kombiniert die Filter -> Es werden nur die Sender genommen, zu denen alle Filter übereinstimmen
-      })
-    : [];
 
   const loadMoreStations = () => {
     setVisibleCount((prevCount) => prevCount + 100); // Anzahl der sichtbaren Sender um 100 erhöhen
@@ -46,17 +35,17 @@ const Stationpage = () => {
   const countryOptions = countries.map((country) => ({
     value: country.code,
     label: country.name,
-  }));
+  })); //Geht alle Länder, die in filter.js gesetzt sind, durch
 
   const languageOptions = languages.map((language) => ({
     value: language.code,
     label: language.name,
-  }));
+  })); //Geht alle Sprachen, die in filter.js gesetzt sind, durch
 
   const tagOptions = tags.map((tag) => ({
     value: tag.code,
     label: tag.name,
-  }));
+  })); //Geht alle tags, die in filter.js gesetzt sind, durch
 
   return (
     <div>

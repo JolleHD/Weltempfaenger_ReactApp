@@ -11,7 +11,27 @@ export const RadioProvider = ({ children }) => {
     staleTime: Infinity,
   }); //useQuery für fetch
 
-  const [currentStation, setCurrentStation] = useState(null);
+  const [currentStation, setCurrentStation] = useState(null); //Zum Setzen des aktuellen Senders
+
+  const [filter, setFilter] = useState({
+    countrycode: "",
+    language: "",
+    tags: "",
+  }); // Zustand für das Filterobjekt
+
+  // Funktion zum Filtern der Sender basierend auf dem Filterobjekt
+  const filteredStations = data
+    ? data.filter((station) => {
+      // .filter()-Methode erstellt ein neues Array, das nur die Sender enthält, die die angegebenen Bedingungen erfüllen
+      const matchesCountrycode =
+        filter.countrycode === "" || station.countrycode === filter.countrycode; // Prüft, ob Countrycode-Feld leer (Sender auch anzeigen, wenn kein Filter gesetzt ist) ist oder mit station.countrycode übereinstimmt
+      const matchesLanguage =
+        filter.language === "" || station.language === filter.language; // Prüft, ob language-Feld leer ist oder mit station.language übereinstimmt
+      const matchesTag =
+        filter.tags === "" || station.tags.includes(filter.tags); // Prüft, ob tags-Feld leer ist oder mit station.tags übereinstimmt
+      return matchesCountrycode && matchesLanguage && matchesTag; // Kombiniert die Filter -> Es werden nur die Sender genommen, zu denen alle Filter übereinstimmen
+    })
+    : [];
 
   return (
     <RadioContext.Provider
@@ -23,6 +43,9 @@ export const RadioProvider = ({ children }) => {
         error,
         currentStation,
         setCurrentStation,
+        filter,
+        setFilter,
+        filteredStations,
       }}
     >
       {children}

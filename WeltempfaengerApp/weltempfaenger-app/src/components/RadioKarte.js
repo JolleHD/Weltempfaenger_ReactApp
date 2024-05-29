@@ -20,7 +20,8 @@ L.Icon.Default.mergeOptions({
 });
 
 const RadioKarte = () => {
-  const { isError, isLoading, data, error, setCurrentStation } = useRadio();
+  const { isError, isLoading, error, setCurrentStation, filteredStations } =
+    useRadio(); //Custom Hook useRadio, damit werden die Sender gefetcht und der aktuelle Sender gesetzt
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>{error.message}</p>;
@@ -38,7 +39,7 @@ const RadioKarte = () => {
           attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
         />
         <MarkerClusterGroup>
-          {data.map(
+          {filteredStations.map(
             (station) =>
               station.geo_lat &&
               station.geo_long && (

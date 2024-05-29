@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRadio } from "../context/RadioContext";
-import { countries, languages } from "../utils/filter";
+import { countries, languages, tags } from "../utils/filter";
 
 const Stationpage = () => {
   const { isError, isLoading, data, error, currentStation, setCurrentStation } =
@@ -53,12 +53,10 @@ const Stationpage = () => {
     label: language.name,
   }));
 
-  const tagOptions = [
-    { value: "", label: "All Tags" },
-    { value: "rock", label: "Rock" },
-    { value: "pop", label: "Pop" },
-    // Add more tags as needed
-  ];
+  const tagOptions = tags.map((tag) => ({
+    value: tag.code,
+    label: tag.name,
+  }));
 
   return (
     <div>

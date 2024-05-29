@@ -1,5 +1,6 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useRadio } from "../context/RadioContext";
+import { countries, languages } from "../utils/filter";
 
 const Stationpage = () => {
   const { isError, isLoading, data, error, currentStation, setCurrentStation } =
@@ -11,17 +12,10 @@ const Stationpage = () => {
   }); // Zustand für das Filterobjekt
   const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
 
-  const inputRefs = {
-    countrycode: useRef(null),
-    language: useRef(null),
-    tags: useRef(null),
-  }; // Referenzen auf die Input-Fields
-
-  // Funktion zum Aktualisieren des Filterobjekts - wird aufgerufen, wenn sich der Wert eines der Eingabefelder ändert
-  const handleInputChange = (filterKey) => {
+  const handleSelectChange = (event, filterKey) => {
     setFilter({
-      ...filter, // Bestehendes Filterobjekt wird kopiert
-      [filterKey]: inputRefs[filterKey].current.value, // Der spezifische Filter wird aktualisiert
+      ...filter,
+      [filterKey]: event.target.value,
     });
     setVisibleCount(100);
   };
@@ -48,6 +42,23 @@ const Stationpage = () => {
   const loadMoreStations = () => {
     setVisibleCount((prevCount) => prevCount + 100); // Anzahl der sichtbaren Sender um 100 erhöhen
   };
+
+  const countryOptions = countries.map((country) => ({
+    value: country.code,
+    label: country.name,
+  }));
+
+  const languageOptions = languages.map((language) => ({
+    value: language.code,
+    label: language.name,
+  }));
+
+  const tagOptions = [
+    { value: "", label: "All Tags" },
+    { value: "rock", label: "Rock" },
+    { value: "pop", label: "Pop" },
+    // Add more tags as needed
+  ];
 
   return (
     <div>
@@ -77,24 +88,36 @@ const Stationpage = () => {
       )}
       <div className="content">
         <h1>List of Radio Stations</h1>
-        <input
-          type="text"
-          placeholder="Countrycode"
-          ref={inputRefs.countrycode}
-          onChange={() => handleInputChange("countrycode")}
-        ></input>
-        <input
-          type="text"
-          placeholder="Language"
-          ref={inputRefs.language}
-          onChange={() => handleInputChange("language")}
-        ></input>
-        <input
-          type="text"
-          placeholder="Tag"
-          ref={inputRefs.tags}
-          onChange={() => handleInputChange("tags")}
-        ></input>
+        <select
+          value={filter.countrycode}
+          onChange={(event) => handleSelectChange(event, "countrycode")}
+        >
+          {countryOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <select
+          value={filter.language}
+          onChange={(event) => handleSelectChange(event, "language")}
+        >
+          {languageOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <select
+          value={filter.tags}
+          onChange={(event) => handleSelectChange(event, "tags")}
+        >
+          {tagOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
         {isError ? (
           <p>{error.message}</p>
         ) : isLoading ? (

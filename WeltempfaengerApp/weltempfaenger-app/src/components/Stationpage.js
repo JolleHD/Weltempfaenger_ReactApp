@@ -48,9 +48,15 @@ const Stationpage = () => {
   })); //Geht alle tags, die in filter.js gesetzt sind, durch
 
   return (
-    <div>
+    <div className="stationpage">
       <style jsx>{`
         /* Muss noch in extra CSS Datei, am besten Komponente noch weiter aufteilen */
+        .stationpage {
+          padding: 20px;
+          height: 100%;
+          overflow-y: auto;
+        }
+
         .fixed-player {
           position: fixed;
           bottom: 0;

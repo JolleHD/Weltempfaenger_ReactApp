@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Stationpage from "./components/Stationpage";
@@ -17,12 +18,28 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // useState für die Sidebar offen / geschlossen
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <RadioProvider>
-          <RadioKarte />
-          <Stationpage />
+          <div className={`sidebar ${isSidebarOpen ? "" : "collapsed"}`}>
+            <Stationpage />
+          </div>
+          <div className="map-container">
+            <button
+              className={`toggle-button ${isSidebarOpen ? "" : "collapsed"}`}
+              onClick={toggleSidebar}
+            >
+              {isSidebarOpen ? "<<" : ">>"}
+            </button>
+            <RadioKarte />
+          </div>
         </RadioProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

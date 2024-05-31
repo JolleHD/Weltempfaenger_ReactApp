@@ -18,10 +18,10 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // useState für die Sidebar offen / geschlossen
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // useState für die Sidebar offen / geschlossen
 
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+    setIsSidebarOpen((prev) => !prev);
   };
 
   return (

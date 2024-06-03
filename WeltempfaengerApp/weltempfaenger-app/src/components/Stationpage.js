@@ -12,6 +12,9 @@ const Stationpage = () => {
     filter,
     setFilter,
     filteredStations,
+    addFavorite,
+    removeFavorite,
+    isFavorite,
   } = useRadio();
 
   const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
@@ -122,6 +125,15 @@ const Stationpage = () => {
                 <li key={index}>
                   <button onClick={() => handleStationClick(station)}>
                     {station.name}
+                  </button>
+                  <button
+                    onClick={() =>
+                      isFavorite(station)
+                        ? removeFavorite(station)
+                        : addFavorite(station)
+                    }
+                  >
+                    {isFavorite(station) ? "❤️" : "♡"}
                   </button>
                 </li>
               ))}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRadio } from "../context/RadioContext";
 import { countries, languages, tags } from "../utils/filter";
+import "./StationPage.css"; // Hier importierst du die CSS-Datei
 
 const Stationpage = () => {
   const {

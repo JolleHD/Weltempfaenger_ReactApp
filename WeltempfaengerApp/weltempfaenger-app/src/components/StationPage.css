@@ -1,0 +1,64 @@
+/* Allgemeine Stile */
+.stationpage {
+    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  /* Fest fixierter Player */
+  .fixed-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff; /* Hintergrundfarbe, um den Player hervorzuheben */
+    z-index: 1000; /* Stellt sicher, dass der Player über anderen Elementen liegt */
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Inhalt */
+  .content {
+    margin-bottom: 200px; /* Platz für den fest fixierten Player */
+  }
+  
+  /* Dropdown-Menü-Stile */
+  select {
+    padding: 10px;
+    border: 1px solid #af368c; /* Lila als Akzentfarbe */
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: #fff; /* Weißer Hintergrund */
+    color: #333333; /* Dunkler Text */
+    font-family: 'Roboto Slab', serif; /* Beispielhafte Schriftart */
+    font-size: 16px;
+  }
+  
+  /* Optionen im Dropdown-Menü */
+  option {
+    background-color: #fff; /* Weißer Hintergrund */
+    color: #333333; /* Dunkler Text */
+  }
+  
+  /* Button-Stile */
+  button {
+    padding: 10px 20px;
+    background-color: #ec6525; /* Orange als Akzentfarbe */
+    color: #fff; /* Weißer Text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Fira Sans', sans-serif; /* Beispielhafte Schriftart */
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #cf1820; /* Rotes Hover */
+  }
+  
+  /* Fehlermeldung */
+  p.error-message {
+    color: #cf1820; /* Rote Fehlermeldung */
+  }
+  

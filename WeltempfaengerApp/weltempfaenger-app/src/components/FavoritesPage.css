@@ -1,0 +1,72 @@
+.favorites-container {
+  font-family: "Myriad Pro", sans-serif;
+  background-color: #ec6525;
+  width: 380px;
+  padding: 20px;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.favorites-container::-webkit-scrollbar {
+  display: none;
+}
+
+.headline {
+  position: fixed;
+  top: 0;
+  text-align: center;
+  background-color: #ec6525;
+  color: white;
+  margin-bottom: 5px;
+  width: 380px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 40px;
+  padding-top: 80px;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #2e2b2b;
+  border-radius: 5px;
+}
+
+li button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+li button:hover {
+  color: #af368c;
+}
+
+.favorite-button {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.favorite-button .filled,
+.favorite-button .unfilled {
+  width: 40px; /* Anpassung der Breite */
+  height: 40px; /* Anpassung der Höhe */
+}
+
+.favorite-button .filled {
+  fill: #cf1820; /* Farbe für das gefüllte Herz */
+}
+
+.favorite-button .unfilled {
+  fill: none;
+  stroke: #fff; /* Farbe für das ungefüllte Herz */
+  stroke-width: 2;
+}

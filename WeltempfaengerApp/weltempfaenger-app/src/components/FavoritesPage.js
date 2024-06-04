@@ -1,4 +1,6 @@
 import { useRadio } from "../context/RadioContext";
+import "./FavoritesPage.css";
+import { ReactComponent as HeartIcon } from "../assets/heart.svg";
 
 const FavoritesPage = () => {
   const {
@@ -14,8 +16,10 @@ const FavoritesPage = () => {
   };
 
   return (
-    <div>
-      <h1>Favorites</h1>
+    <div className="favorites-container">
+      <div className="headline">
+        <h1>Favorites</h1>
+      </div>
       {favorites.length === 0 ? (
         <p>No favorites added yet.</p>
       ) : (
@@ -26,13 +30,16 @@ const FavoritesPage = () => {
                 {station.name}
               </button>
               <button
+                className="favorite-button"
                 onClick={() =>
                   isFavorite(station)
                     ? removeFavorite(station)
                     : addFavorite(station)
                 }
               >
-                {isFavorite(station) ? "❤️" : "♡"}
+                <HeartIcon
+                  className={isFavorite(station) ? "filled" : "unfilled"}
+                />
               </button>
             </li>
           ))}

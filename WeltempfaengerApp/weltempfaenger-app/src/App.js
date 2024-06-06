@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Stationpage from "./components/Stationpage";
 import RadioKarte from "./components/RadioKarte";
+import RadioPlayer from "./components/RadioPlayer";
 import { RadioProvider } from "./context/RadioContext";
 
 // Erstelle eine Instanz des QueryClient
@@ -39,6 +40,7 @@ function App() {
               {isSidebarOpen ? "<<" : ">>"}
             </button>
             <RadioKarte />
+            <RadioPlayer />
           </div>
         </RadioProvider>
         <ReactQueryDevtools initialIsOpen={false} />

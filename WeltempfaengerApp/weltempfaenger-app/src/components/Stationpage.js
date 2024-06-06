@@ -7,7 +7,6 @@ const Stationpage = () => {
     isError,
     isLoading,
     error,
-    currentStation,
     setCurrentStation,
     filter,
     setFilter,
@@ -25,7 +24,8 @@ const Stationpage = () => {
   }; // Aktualisiert bei Änderungen der Filter die passenden Stationen
 
   const handleStationClick = (station) => {
-    setCurrentStation(station); //Setze aktuellen Sender
+    console.log("Selected station:", station); // Debugging
+    setCurrentStation(station); // Setze aktuellen Sender
   };
 
   const loadMoreStations = () => {
@@ -35,50 +35,30 @@ const Stationpage = () => {
   const countryOptions = countries.map((country) => ({
     value: country.code,
     label: country.name,
-  })); //Geht alle Länder, die in filter.js gesetzt sind, durch
+  })); // Geht alle Länder, die in filter.js gesetzt sind, durch
 
   const languageOptions = languages.map((language) => ({
     value: language.code,
     label: language.name,
-  })); //Geht alle Sprachen, die in filter.js gesetzt sind, durch
+  })); // Geht alle Sprachen, die in filter.js gesetzt sind, durch
 
   const tagOptions = tags.map((tag) => ({
     value: tag.code,
     label: tag.name,
-  })); //Geht alle tags, die in filter.js gesetzt sind, durch
+  })); // Geht alle tags, die in filter.js gesetzt sind, durch
 
   return (
     <div className="stationpage">
       <style jsx>{`
-        /* Muss noch in extra CSS Datei, am besten Komponente noch weiter aufteilen */
         .stationpage {
           padding: 20px;
           height: 100%;
           overflow-y: auto;
         }
-
-        .fixed-player {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          background-color: #fff; /* Hintergrundfarbe, um den Player hervorzuheben */
-          z-index: 1000; /* Stellt sicher, dass der Player über anderen Elementen liegt */
-          padding: 10px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
         .content {
           margin-bottom: 200px; /* Platz für den fest fixierten Player */
         }
       `}</style>
-      {currentStation && (
-        <div className="fixed-player">
-          <h2>Now Playing: {currentStation.name}</h2>
-          <audio controls src={currentStation.url} autoPlay>
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-      )}
       <div className="content">
         <h1>List of Radio Stations</h1>
         <select

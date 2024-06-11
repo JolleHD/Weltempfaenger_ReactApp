@@ -11,44 +11,44 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #fff; /* Hintergrundfarbe, um den Player hervorzuheben */
-    z-index: 1000; /* Stellt sicher, dass der Player über anderen Elementen liegt */
+    background-color: #fff; 
+    z-index: 1000; 
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   /* Inhalt */
   .content {
-    margin-bottom: 200px; /* Platz für den fest fixierten Player */
+    margin-bottom: 200px; 
   }
   
   /* Dropdown-Menü-Stile */
   select {
     padding: 10px;
-    border: 1px solid #af368c; /* Lila als Akzentfarbe */
+    border: 1px solid #af368c; 
     border-radius: 5px;
     margin-right: 10px;
-    background-color: #fff; /* Weißer Hintergrund */
-    color: #333333; /* Dunkler Text */
-    font-family: 'Roboto Slab', serif; /* Beispielhafte Schriftart */
+    background-color: #fff; 
+    color: #333333; 
+    font-family: 'Roboto Slab', serif; 
     font-size: 16px;
   }
   
   /* Optionen im Dropdown-Menü */
   option {
-    background-color: #fff; /* Weißer Hintergrund */
-    color: #333333; /* Dunkler Text */
+    background-color: #fff; 
+    color: #333333;
   }
   
   /* Button-Stile */
   button {
     padding: 10px 20px;
-    background-color: #ec6525; /* Orange als Akzentfarbe */
-    color: #fff; /* Weißer Text */
+    background-color: #ec6525; 
+    color: #fff; 
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-family: 'Fira Sans', sans-serif; /* Beispielhafte Schriftart */
+    font-family: 'Fira Sans', sans-serif; 
     font-size: 16px;
     transition: background-color 0.3s;
   }
@@ -59,6 +59,6 @@
   
   /* Fehlermeldung */
   p.error-message {
-    color: #cf1820; /* Rote Fehlermeldung */
+    color: #cf1820; 
   }
   

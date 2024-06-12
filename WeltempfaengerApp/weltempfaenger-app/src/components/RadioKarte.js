@@ -7,6 +7,8 @@ import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { useRadio } from "../context/RadioContext";
+import "./Map.css";
+
 
 // Fix the default icon issue with Leaflet in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -26,6 +28,22 @@ const RadioKarte = () => {
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>{error.message}</p>;
 
+  // Eigene Symbole definieren
+  const customIcon1 = L.divIcon({
+    className: 'custom-icon custom-icon-1',
+    html: '<i class="fas fa-broadcast-tower"></i>',
+    iconSize: [25, 25],
+    iconAnchor: [12, 12]
+  });
+
+  const customIcon2 = L.divIcon({
+    className: 'custom-icon custom-icon-2',
+    html: '<i class="fas fa-broadcast-tower"></i>',
+    iconSize: [25, 25],
+    iconAnchor: [12, 12]
+  });
+
+
   //Leaflet Map
   return (
     <div>
@@ -40,12 +58,13 @@ const RadioKarte = () => {
         />
         <MarkerClusterGroup>
           {filteredStations.map(
-            (station) =>
+            (station, index) =>
               station.geo_lat &&
               station.geo_long && (
                 <Marker
                   key={station.stationuuid}
                   position={[station.geo_lat, station.geo_long]}
+                  icon={index % 2 === 0 ? customIcon1 : customIcon2}
                   eventHandlers={{
                     click: () => {
                       setCurrentStation(station);

@@ -5,6 +5,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Stationpage from "./components/Stationpage";
 import RadioKarte from "./components/RadioKarte";
 import { RadioProvider } from "./context/RadioContext";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 // Erstelle eine Instanz des QueryClient
 const queryClient = new QueryClient({

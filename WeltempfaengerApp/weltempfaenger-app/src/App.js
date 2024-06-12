@@ -25,7 +25,7 @@ function App() {
     setIsSidebarOpen((prev) => !prev);
   };
 
-  /* return (
+  return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <RadioProvider>
@@ -45,18 +45,18 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </div>
-  ); */
-
-  return (
-    <div className="App">
-      <QueryClientProvider client={queryClient}>
-        <RadioProvider>
-          <FavoritesPage />
-        </RadioProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </div>
   );
+
+  // return (
+  //   <div className="App">
+  //     <QueryClientProvider client={queryClient}>
+  //       <RadioProvider>
+  //         <FavoritesPage />
+  //       </RadioProvider>
+  //       <ReactQueryDevtools initialIsOpen={false} />
+  //     </QueryClientProvider>
+  //   </div>
+  // );
 }
 
 export default App;

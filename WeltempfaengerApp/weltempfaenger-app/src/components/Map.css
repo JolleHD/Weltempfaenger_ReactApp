@@ -2,11 +2,11 @@
 #map {
     height: 100vh;
     width: 100%;
-    background: linear-gradient(45deg, red, purple, orange, black);
+    background: linear-gradient(45deg, rgba(228, 35, 35, 0.839), rgba(175, 9, 175, 0.514), rgb(239, 121, 11), rgba(21, 21, 21, 0.945));
   }
   
   .custom-icon {
-    background-color: red;
+    background-color: rgb(248, 2, 2);
     border-radius: 50%;
     width: 25px;
     height: 25px;
@@ -19,11 +19,11 @@
   }
   
   .custom-icon-1 {
-    background: linear-gradient(to bottom right, red, purple);
+    background: linear-gradient(to bottom right, rgba(245, 3, 3, 0.924), rgba(128, 0, 128, 0.764));
   }
   
   .custom-icon-2 {
-    background: linear-gradient(to bottom right, orange, black);
+    background: linear-gradient(to bottom right, rgb(255, 94, 0), rgba(43, 43, 43, 0.81));
   }
   .custom-icon i {
     font-size: 16px;

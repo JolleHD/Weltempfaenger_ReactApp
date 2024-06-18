@@ -51,16 +51,7 @@ const RadioKarte = () => {
                       setCurrentStation(station);
                     },
                   }}
-                >
-                  <Popup>
-                    <div>
-                      <h3>{station.name}</h3>
-                      <p>{station.country}</p>
-                      <p>{station.state}</p>
-                      <p>{station.tags}</p>
-                    </div>
-                  </Popup>
-                </Marker>
+                ></Marker>
               )
           )}
         </MarkerClusterGroup>

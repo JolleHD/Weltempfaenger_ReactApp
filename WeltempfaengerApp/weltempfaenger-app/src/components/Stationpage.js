@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useRadio } from "../context/RadioContext";
 import { countries, languages, tags } from "../utils/filter";
+import "./Stationpage.css";
+import { ReactComponent as HeartIcon } from "../assets/heart.svg";
 
 const Stationpage = () => {
   const {
@@ -52,28 +54,6 @@ const Stationpage = () => {
 
   return (
     <div className="stationpage">
-      <style jsx>{`
-        /* Muss noch in extra CSS Datei, am besten Komponente noch weiter aufteilen */
-        .stationpage {
-          padding: 20px;
-          height: 100%;
-          overflow-y: auto;
-        }
-
-        .fixed-player {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          background-color: #fff; /* Hintergrundfarbe, um den Player hervorzuheben */
-          z-index: 1000; /* Stellt sicher, dass der Player über anderen Elementen liegt */
-          padding: 10px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .content {
-          margin-bottom: 200px; /* Platz für den fest fixierten Player */
-        }
-      `}</style>
       {currentStation && (
         <div className="fixed-player">
           <h2>Now Playing: {currentStation.name}</h2>
@@ -127,13 +107,16 @@ const Stationpage = () => {
                     {station.name}
                   </button>
                   <button
+                    className="favorite-button"
                     onClick={() =>
                       isFavorite(station)
                         ? removeFavorite(station)
                         : addFavorite(station)
                     }
                   >
-                    {isFavorite(station) ? "❤️" : "♡"}
+                    <HeartIcon
+                      className={isFavorite(station) ? "filled" : "unfilled"}
+                    />
                   </button>
                 </li>
               ))}

@@ -6,6 +6,8 @@ import Stationpage from "./components/Stationpage";
 import RadioKarte from "./components/RadioKarte";
 import { RadioProvider } from "./context/RadioContext";
 import FavoritesPage from "./components/FavoritesPage";
+import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Erstelle eine Instanz des QueryClient
 const queryClient = new QueryClient({
@@ -19,26 +21,19 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // useState für die Sidebar offen / geschlossen
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
-  };
-
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <RadioProvider>
-          <div className={`sidebar ${isSidebarOpen ? "" : "collapsed"}`}>
-            <Stationpage />
-          </div>
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path="/" />
+              <Route path="/filter" element={<Stationpage />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
+            </Routes>
+          </Router>
           <div className="map-container">
-            <button
-              className={`toggle-button ${isSidebarOpen ? "" : "collapsed"}`}
-              onClick={toggleSidebar}
-            >
-              {isSidebarOpen ? "<<" : ">>"}
-            </button>
             <RadioKarte />
           </div>
         </RadioProvider>

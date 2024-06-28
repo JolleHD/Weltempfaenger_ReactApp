@@ -36,3 +36,20 @@
 .toggle-button.collapsed {
   left: 20px;
 }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Myriad Pro", sans-serif;
+}
+
+.home,
+.filter,
+.favorites {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}

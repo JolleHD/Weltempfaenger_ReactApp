@@ -1,4 +1,4 @@
-.favorites-container {
+.stationpage {
   font-family: "Myriad Pro", sans-serif;
   background-color: #060b26;
   width: 380px;
@@ -7,7 +7,7 @@
   height: 100vh;
 }
 
-.favorites-container::-webkit-scrollbar {
+.stationpage::-webkit-scrollbar {
   display: none;
 }
 
@@ -21,11 +21,14 @@
   width: 380px;
 }
 
+.content {
+  padding-top: 80px; /* Platz für die fixierte Überschrift */
+}
+
 ul {
   list-style-type: none;
   padding: 0;
   margin-bottom: 40px;
-  padding-top: 80px;
 }
 
 li {

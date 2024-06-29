@@ -1,6 +1,7 @@
 import { useRadio } from "../context/RadioContext";
 import "./FavoritesPage.css";
 import { ReactComponent as HeartIcon } from "../assets/heart.svg";
+import * as Io5Icons from "react-icons/io5";
 
 const FavoritesPage = () => {
   const {
@@ -37,7 +38,7 @@ const FavoritesPage = () => {
                     : addFavorite(station)
                 }
               >
-                <HeartIcon
+                <Io5Icons.IoHeartDislikeOutline
                   className={isFavorite(station) ? "filled" : "unfilled"}
                 />
               </button>

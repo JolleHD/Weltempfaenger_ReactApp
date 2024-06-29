@@ -27,31 +27,22 @@ function App() {
         <RadioProvider>
           <Router>
             <Navbar />
-            <Routes>
-              <Route path="/" />
-              <Route path="/filter" element={<Stationpage />} />
-              <Route path="/favorites" element={<FavoritesPage />} />
-            </Routes>
+            <div className="content">
+              <Routes>
+                <Route path="/" />
+                <Route path="/filter" element={<Stationpage />} />
+                <Route path="/favorites" element={<FavoritesPage />} />
+              </Routes>
+              <div className="map-container">
+                <RadioKarte />
+              </div>
+            </div>
           </Router>
-          <div className="map-container">
-            <RadioKarte />
-          </div>
         </RadioProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </div>
   );
-
-  // return (
-  //   <div className="App">
-  //     <QueryClientProvider client={queryClient}>
-  //       <RadioProvider>
-  //         <FavoritesPage />
-  //       </RadioProvider>
-  //       <ReactQueryDevtools initialIsOpen={false} />
-  //     </QueryClientProvider>
-  //   </div>
-  // );
 }
 
 export default App;

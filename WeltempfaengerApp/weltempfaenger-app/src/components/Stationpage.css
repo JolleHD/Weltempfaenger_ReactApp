@@ -5,6 +5,7 @@
   padding: 20px;
   overflow-y: auto;
   height: 100vh;
+  margin-bottom: 90px;
 }
 
 .stationpage::-webkit-scrollbar {
@@ -23,12 +24,19 @@
 
 .content {
   padding-top: 80px; /* Platz für die fixierte Überschrift */
+  color: #ec6525;
 }
 
 ul {
   list-style-type: none;
   padding: 0;
-  margin-bottom: 40px;
+  margin: 0;
+}
+
+ul::after {
+  content: "";
+  display: block;
+  height: 60px; /* Platz am Ende der Liste */
 }
 
 li {
@@ -72,4 +80,24 @@ li button:hover {
   fill: none;
   stroke: #fff; /* Farbe für das ungefüllte Herz */
   stroke-width: 2;
+}
+
+.load-more-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.load-more-button {
+  background-color: #ec6525;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.load-more-button:hover {
+  background-color: #af368c;
 }

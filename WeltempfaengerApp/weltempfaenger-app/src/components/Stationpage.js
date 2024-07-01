@@ -54,16 +54,8 @@ const Stationpage = () => {
 
   return (
     <div className="stationpage">
-      {currentStation && (
-        <div className="fixed-player">
-          <h2>Now Playing: {currentStation.name}</h2>
-          <audio controls src={currentStation.url} autoPlay>
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-      )}
       <div className="content">
-        <h1>List of Radio Stations</h1>
+        <h1>Radiosender</h1>
         <select
           value={filter.countrycode}
           onChange={(event) => handleSelectChange(event, "countrycode")}
@@ -122,7 +114,11 @@ const Stationpage = () => {
               ))}
             </ul>
             {visibleCount < filteredStations.length && (
-              <button onClick={loadMoreStations}>Load More</button>
+              <div className="load-more-button-container">
+                <button className="load-more-button" onClick={loadMoreStations}>
+                  Load More
+                </button>
+              </div>
             )}
           </div>
         )}

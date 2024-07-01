@@ -6,37 +6,18 @@
   position: relative;
 }
 
-.sidebar {
-  width: 340px;
-  transition: width 0.3s ease-in-out;
-  overflow: hidden;
-}
-
-.sidebar.collapsed {
-  width: 0;
+.content {
+  position: relative;
+  z-index: 100;
 }
 
 .map-container {
-  flex-grow: 1;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   z-index: 0;
-}
-
-.toggle-button {
-  position: absolute;
-  top: 50%;
-  left: 60px;
-  z-index: 1000;
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.toggle-button.collapsed {
-  left: 20px;
 }
 
 * {

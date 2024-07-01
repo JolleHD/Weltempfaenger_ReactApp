@@ -8,6 +8,7 @@ import { RadioProvider } from "./context/RadioContext";
 import FavoritesPage from "./components/FavoritesPage";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import RadioPlayer from "./components/RadioPlayer";
 
 // Erstelle eine Instanz des QueryClient
 const queryClient = new QueryClient({
@@ -33,9 +34,10 @@ function App() {
                 <Route path="/filter" element={<Stationpage />} />
                 <Route path="/favorites" element={<FavoritesPage />} />
               </Routes>
-              <div className="map-container">
-                <RadioKarte />
-              </div>
+            </div>
+            <div className="map-container">
+              <RadioKarte />
+              <RadioPlayer />
             </div>
           </Router>
         </RadioProvider>

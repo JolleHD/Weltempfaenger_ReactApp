@@ -18,9 +18,7 @@ const FavoritesPage = () => {
 
   return (
     <div className="favorites-container">
-      <div className="headline">
-        <h1>Favorites</h1>
-      </div>
+      <h1>Favoriten</h1>
       {favorites.length === 0 ? (
         <p>No favorites added yet.</p>
       ) : (

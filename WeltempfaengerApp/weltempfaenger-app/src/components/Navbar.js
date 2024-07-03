@@ -7,17 +7,17 @@ import "./Navbar.css";
 import { IconContext } from "react-icons/lib";
 
 function Navbar() {
-  const [sidebar, setSidebar] = useState(false); //Zum Ein- und Ausklappen der Sidebar mit Konditionaloperator
-  const [pageSelected, setPageSelected] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); //Zum Ein- und Ausklappen der Sidebar mit Konditionaloperator
+  const [isPageSelected, setIsPageSelected] = useState(false);
 
-  const showSidebar = () => setSidebar(!sidebar); //Je nachdem, ob die Sidebar ausgeklappt ist oder nicht, wird der boolean Wert zum Gegenteil geändert
-  const showPage = () => setPageSelected(!pageSelected);
+  const showSidebar = () => setIsSidebarOpen(!isSidebarOpen); //Je nachdem, ob die Sidebar ausgeklappt ist oder nicht, wird der boolean Wert zum Gegenteil geändert
+  const showPage = () => setIsPageSelected(!isPageSelected);
 
   return (
     <>
       <IconContext.Provider value={{ color: "#ec6525" }}>
-        <div className={!pageSelected ? "navbar" : "navbar-home"}>
-          {!sidebar && (
+        <div className={!isPageSelected ? "navbar" : "navbar-home"}>
+          {!isSidebarOpen && (
             <div className="bars-container">
               <Link to="#" className="menu-bars">
                 <FaIcons.FaBars onClick={showSidebar} />
@@ -28,7 +28,7 @@ function Navbar() {
             </div>
           )}
         </div>
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+        <nav className={isSidebarOpen ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
             <li className="navbar-toggle">
               <Link to="#" className="menu-bars">

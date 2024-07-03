@@ -8,8 +8,15 @@ import { IconContext } from "react-icons/lib";
 
 function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); //Zum Ein- und Ausklappen der Sidebar mit Konditionaloperator
+  const [isFilterListOpen, setIsFilterListOpen] = useState(false);
 
-  const showSidebar = () => setIsSidebarOpen(!isSidebarOpen); //Je nachdem, ob die Sidebar ausgeklappt ist oder nicht, wird der boolean Wert zum Gegenteil geändert
+  //const showSidebar = () => setIsSidebarOpen(!isSidebarOpen); //Je nachdem, ob die Sidebar ausgeklappt ist oder nicht, wird der boolean Wert zum Gegenteil geändert
+  const showSidebar = () => {
+    if (isFilterListOpen) {
+      setIsFilterListOpen(false); // Schließt die Filterliste, wenn die Sidebar geöffnet wird
+    }
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
     <>
@@ -18,10 +25,7 @@ function Navbar() {
           {!isSidebarOpen && (
             <div className="bars-container">
               <Link to="#" className="menu-bars">
-                <FaIcons.FaBars onClick={showSidebar} />
-              </Link>
-              <Link to="/" className="menu-closer">
-                <AiIcons.AiOutlineClose onClick={showSidebar} />
+                <FaIcons.FaBars className="icon-border" onClick={showSidebar} />
               </Link>
             </div>
           )}

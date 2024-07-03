@@ -1,0 +1,57 @@
+.custom-marker-radioicon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200px;
+}
+
+.radioicon-border {
+  padding: 10px;
+  border: 3.5px solid #ec6525; /* Farbe der Umrandung */
+  border-radius: 50%; /* Rundet die Ecken ab */
+  transition: background-color 0.3s, border-color 0.3s;
+  z-index: 1000;
+  display: flex; /* Flexbox für zentriertes Icon */
+  justify-content: center; /* Horizontales Zentrieren */
+  align-items: center;
+}
+
+.radioicon-border:hover {
+  background-color: #ec6525; /* Hintergrundfarbe bei Hover */
+  border-color: #af368c; /* Farbe der Umrandung bei Hover */
+  color: #fff; /* Icon-Farbe bei Hover */
+}
+
+/* Anpassung der Cluster-Marker */
+
+.marker-cluster-small {
+  background-color: #af368d6c;
+  opacity: 0.5;
+}
+
+.marker-cluster-small span {
+  margin-left: -1px;
+}
+
+.marker-cluster-small div {
+  background-color: #af368c; /* Farbe für kleine Cluster */
+  color: #fff; /* Textfarbe */
+}
+
+.marker-cluster-medium span {
+  margin-left: -1px;
+}
+
+.marker-cluster-medium div {
+  background-color: #ec6525; /* Farbe für mittlere Cluster */
+  color: #fff; /* Textfarbe */
+}
+
+.marker-cluster-large span {
+  margin-left: -1px;
+}
+
+.marker-cluster-large div {
+  background-color: #cf1820; /* Farbe für große Cluster */
+  color: #fff; /* Textfarbe */
+}

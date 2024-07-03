@@ -7,6 +7,9 @@ import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { useRadio } from "../context/RadioContext";
+import * as LuIcons from "react-icons/lu";
+import ReactDOMServer from "react-dom/server";
+import "./RadioKarte.css";
 
 // Fix the default icon issue with Leaflet in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -17,6 +20,18 @@ L.Icon.Default.mergeOptions({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
   shadowUrl:
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+});
+
+// Create a custom icon using LuRadioTower from react-icons
+const customIcon = L.divIcon({
+  html: ReactDOMServer.renderToString(
+    <div className="radioicon-border">
+      <LuIcons.LuRadioTower style={{ color: "#060b26", fontSize: "24px" }} />
+    </div>
+  ),
+  className: "custom-marker-radioicon",
+  iconSize: [24, 24],
+  iconAnchor: [12, 24],
 });
 
 const RadioKarte = () => {
@@ -33,6 +48,7 @@ const RadioKarte = () => {
         center={[0, 0]}
         zoom={2}
         style={{ height: "100vh", width: "100%" }}
+        zoomControl={false} // Deaktivieren der Zoom-Steuerelemente
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -46,6 +62,7 @@ const RadioKarte = () => {
                 <Marker
                   key={station.stationuuid}
                   position={[station.geo_lat, station.geo_long]}
+                  icon={customIcon}
                   eventHandlers={{
                     click: () => {
                       setCurrentStation(station);

@@ -26,7 +26,6 @@ h1 {
 }
 
 .content {
-  padding-top: 10px; /* Platz für die fixierte Überschrift */
   color: #ec6525;
 }
 
@@ -113,7 +112,7 @@ li button:hover {
 
 .load-more-button {
   position: absolute;
-  bottom: 80px;
+  bottom: 50px;
   background-color: #ec6525;
   color: #fff;
   border: none;

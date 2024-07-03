@@ -1,7 +1,6 @@
 .navbar {
-  background-color: #060b26;
   height: 80px;
-  width: 380px;
+  width: 80px;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -15,9 +14,23 @@
 }
 
 .menu-bars {
-  margin-left: 2rem;
-  font-size: 2rem;
+  margin-left: 1rem;
+  font-size: 3rem;
   background: none;
+}
+
+.icon-border {
+  padding: 10px;
+  border: 2px solid #ec6525; /* Farbe der Umrandung */
+  border-radius: 50%; /* Rundet die Ecken ab */
+  transition: background-color 0.3s, border-color 0.3s;
+  z-index: 1000;
+}
+
+.icon-border:hover {
+  background-color: #060b26; /* Hintergrundfarbe bei Hover */
+  border-color: #af368c; /* Farbe der Umrandung bei Hover */
+  color: #fff; /* Icon-Farbe bei Hover */
 }
 
 .nav-menu {

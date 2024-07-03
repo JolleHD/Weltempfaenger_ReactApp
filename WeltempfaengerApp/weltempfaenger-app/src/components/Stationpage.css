@@ -36,7 +36,7 @@ ul {
 ul::after {
   content: "";
   display: block;
-  height: 60px; /* Platz am Ende der Liste */
+  height: 90px; /* Platz am Ende der Liste */
 }
 
 li {
@@ -85,10 +85,11 @@ li button:hover {
 .load-more-button-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .load-more-button {
+  position: absolute;
+  bottom: 80px;
   background-color: #ec6525;
   color: #fff;
   border: none;

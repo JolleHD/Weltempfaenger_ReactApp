@@ -12,7 +12,7 @@
   font-family: "Fira Sans", sans-serif;
   transition: max-height 0.3s ease-in-out;
   overflow: hidden;
-  max-height: 80px; /* Anfangsgröße des Players */
+  max-height: 100px; /* Anfangsgröße des Players */
 }
 .fixed-player.expanded {
   max-height: 200px; /* Größe des Players, wenn erweitert */

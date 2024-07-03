@@ -1,6 +1,19 @@
 .navbar {
   background-color: #060b26;
   height: 80px;
+  width: 380px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-home {
+  background-color: #060b26;
+  height: 80px;
+  width: 80px;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -74,4 +87,18 @@
 
 span {
   margin-left: 16px;
+}
+
+.bars-container {
+  display: flex;
+}
+
+.menu-closer {
+  display: flex;
+  justify-content: center;
+  left: -100%;
+  margin-left: 250px;
+  font-size: 2rem;
+  transition: 850ms;
+  z-index: 1000;
 }

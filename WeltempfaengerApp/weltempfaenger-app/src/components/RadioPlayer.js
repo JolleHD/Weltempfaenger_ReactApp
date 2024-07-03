@@ -42,8 +42,10 @@ const RadioPlayer = () => {
   };
 
   const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-    console.log("Toggling expand:", !isExpanded);
+    if (currentStation) {
+      setIsExpanded(!isExpanded);
+      console.log("Toggling expand:", !isExpanded);
+    }
   };
 
   return (

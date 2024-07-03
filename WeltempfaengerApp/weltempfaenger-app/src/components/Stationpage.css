@@ -12,19 +12,43 @@
   display: none;
 }
 
+h1 {
+  margin-bottom: 0px;
+}
+
 .headline {
   position: fixed;
   top: 0;
   text-align: center;
   background-color: #060b26;
   color: white;
-  margin-bottom: 5px;
   width: 380px;
 }
 
 .content {
-  padding-top: 80px; /* Platz für die fixierte Überschrift */
+  padding-top: 10px; /* Platz für die fixierte Überschrift */
   color: #ec6525;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-select {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  background-color: #af368c;
+  color: white;
+  width: 100%;
+}
+
+.filter-select:hover {
+  background-color: #cf1820;
 }
 
 ul {

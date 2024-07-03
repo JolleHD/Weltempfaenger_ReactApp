@@ -56,36 +56,41 @@ const Stationpage = () => {
     <div className="stationpage">
       <div className="content">
         <h1>Radiosender</h1>
-        <select
-          value={filter.countrycode}
-          onChange={(event) => handleSelectChange(event, "countrycode")}
-        >
-          {countryOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <select
-          value={filter.language}
-          onChange={(event) => handleSelectChange(event, "language")}
-        >
-          {languageOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <select
-          value={filter.tags}
-          onChange={(event) => handleSelectChange(event, "tags")}
-        >
-          {tagOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <div className="filters">
+          <select
+            className="filter-select"
+            value={filter.countrycode}
+            onChange={(event) => handleSelectChange(event, "countrycode")}
+          >
+            {countryOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <select
+            className="filter-select"
+            value={filter.language}
+            onChange={(event) => handleSelectChange(event, "language")}
+          >
+            {languageOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <select
+            className="filter-select"
+            value={filter.tags}
+            onChange={(event) => handleSelectChange(event, "tags")}
+          >
+            {tagOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
         {isError ? (
           <p>{error.message}</p>
         ) : isLoading ? (

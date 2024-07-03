@@ -8,22 +8,20 @@ import { IconContext } from "react-icons/lib";
 
 function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); //Zum Ein- und Ausklappen der Sidebar mit Konditionaloperator
-  const [isPageSelected, setIsPageSelected] = useState(false);
 
   const showSidebar = () => setIsSidebarOpen(!isSidebarOpen); //Je nachdem, ob die Sidebar ausgeklappt ist oder nicht, wird der boolean Wert zum Gegenteil geändert
-  const showPage = () => setIsPageSelected(!isPageSelected);
 
   return (
     <>
       <IconContext.Provider value={{ color: "#ec6525" }}>
-        <div className={!isPageSelected ? "navbar" : "navbar-home"}>
+        <div className={!isSidebarOpen ? "navbar" : "navbar-closed"}>
           {!isSidebarOpen && (
             <div className="bars-container">
               <Link to="#" className="menu-bars">
                 <FaIcons.FaBars onClick={showSidebar} />
               </Link>
               <Link to="/" className="menu-closer">
-                <AiIcons.AiOutlineClose />
+                <AiIcons.AiOutlineClose onClick={showSidebar} />
               </Link>
             </div>
           )}

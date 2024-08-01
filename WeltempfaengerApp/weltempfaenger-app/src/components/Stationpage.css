@@ -46,6 +46,10 @@ h1 {
   width: 100%;
 }
 
+.filter-select::-webkit-scrollbar {
+  display: none;
+}
+
 .filter-select:hover {
   background-color: #cf1820;
 }

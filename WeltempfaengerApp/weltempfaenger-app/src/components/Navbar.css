@@ -22,6 +22,7 @@
 .icon-border {
   padding: 10px;
   border: 2px solid #ec6525; /* Farbe der Umrandung */
+  background-color: #060b26;
   border-radius: 50%; /* Rundet die Ecken ab */
   transition: background-color 0.3s, border-color 0.3s;
   z-index: 1000;

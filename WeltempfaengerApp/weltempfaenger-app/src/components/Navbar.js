@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import "./Navbar.css";
 import { IconContext } from "react-icons/lib";
@@ -9,6 +9,8 @@ import { IconContext } from "react-icons/lib";
 function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); //Zum Ein- und Ausklappen der Sidebar mit Konditionaloperator
   const [isFilterListOpen, setIsFilterListOpen] = useState(false);
+
+  const location = useLocation(); //Man bekommt die aktuelle URL -> zum Überprüfen welcher Reiter gerade ausgewählt ist (Icon filled und unfilled)
 
   //const showSidebar = () => setIsSidebarOpen(!isSidebarOpen); //Je nachdem, ob die Sidebar ausgeklappt ist oder nicht, wird der boolean Wert zum Gegenteil geändert
   const showSidebar = () => {
@@ -38,10 +40,11 @@ function Navbar() {
               </Link>
             </li>
             {SidebarData.map((item, index) => {
+              const isActive = location.pathname === item.path;
               return (
                 <li key={index} className={item.cName}>
                   <Link to={item.path}>
-                    {item.icon}
+                    {isActive ? item.iconFilled : item.icon}
                     <span>{item.title}</span>
                   </Link>
                 </li>

@@ -9,19 +9,22 @@ export const SidebarData = [
   {
     title: "Home",
     path: "/",
-    icon: <AiIcons.AiFillHome />,
+    icon: <AiIcons.AiOutlineHome />,
+    iconFilled: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
   {
     title: "Filter",
     path: "/filter",
     icon: <TbIcons.TbFilterSearch />,
+    iconFilled: <TbIcons.TbFilterFilled />,
     cName: "nav-text",
   },
   {
     title: "Favorites",
     path: "/favorites",
     icon: <FaIcons.FaRegHeart />,
+    iconFilled: <FaIcons.FaHeart />,
     cName: "nav-text",
   },
 ];

@@ -18,15 +18,19 @@
   max-height: 200px; /* Größe des Players, wenn erweitert */
 }
 .player-content {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 .station-name {
   margin: 0;
+  padding-right: 50px; /* Platz für das Herz-Icon */
   font-size: 16px;
   font-weight: bold;
   color: #ec6525; /* Orange */
+  overflow: hidden;
+  max-width: calc(100% - 5px); /* Verhindert Überlappen mit dem Herz-Icon */
 }
 .mute-button {
   margin-top: 10px;
@@ -66,4 +70,36 @@
 }
 .expanded-content {
   margin-top: 10px;
+}
+
+.favorite {
+  display: flex;
+  align-items: center;
+}
+
+.favoriteToggle-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.favoriteToggle-button .filled,
+.favoriteToggle-button .unfilled {
+  width: 30px; /* Anpassung der Breite */
+  height: 30px; /* Anpassung der Höhe */
+}
+
+.favoriteToggle-button .filled {
+  fill: #cf1820; /* Farbe für das gefüllte Herz */
+}
+
+.favoriteToggle-button .unfilled {
+  fill: none;
+  stroke: #fff; /* Farbe für das ungefüllte Herz */
+  stroke-width: 2;
 }

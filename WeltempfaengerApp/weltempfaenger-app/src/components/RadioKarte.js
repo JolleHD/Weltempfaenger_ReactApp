@@ -38,7 +38,19 @@ const RadioKarte = () => {
   const { isError, isLoading, error, setCurrentStation, filteredStations } =
     useRadio(); //Custom Hook useRadio, damit werden die Sender gefetcht und der aktuelle Sender gesetzt
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div className="loading-container">
+        <div className="loading-text">Weltempfänger</div>
+        <div className="loader">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    );
   if (isError) return <p>{error.message}</p>;
 
   //Leaflet Map

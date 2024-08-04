@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useRadio } from "../context/RadioContext";
 import "./RadioPlayer.css";
 import { ReactComponent as HeartIcon } from "../assets/heart.svg";
-import * as FaIcons from "react-icons/fa";
+import * as Io5Icons from "react-icons/io5";
 
 const RadioPlayer = () => {
   const { currentStation, addFavorite, removeFavorite, isFavorite } =
@@ -74,7 +74,7 @@ const RadioPlayer = () => {
           )}
         </div>
         <button className="mute-button" onClick={toggleMute}>
-          {muted ? "Unmute" : "Mute"}
+          {muted ? <Io5Icons.IoVolumeMuteSharp /> : <Io5Icons.IoVolumeHigh />}
         </button>
         <audio ref={audioRef} controls autoPlay hidden />
         {isExpanded && (

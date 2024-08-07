@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchStations from "../fetchers/fetchStations.js";
+import { countries } from "../utils/filter.js";
 
 const RadioContext = createContext(); //Context um die Daten vom Radiofetch für alle Komponenten die es benötigen zur Verfügung zu stellen
 
@@ -19,6 +20,14 @@ export const RadioProvider = ({ children }) => {
     language: "",
     tags: "",
   }); // Zustand für das Filterobjekt
+
+  const initialMapView = {
+    //Ursprüngliche Kartenansicht
+    coords: [0, 0],
+    zoom: 2,
+  };
+
+  const [mapView, setMapView] = useState(initialMapView); // Zustand für Kartenmitte
 
   //useState für die Liste der Favoritensender
   const [favorites, setFavorites] = useState(() => {
@@ -72,6 +81,18 @@ export const RadioProvider = ({ children }) => {
       })
     : [];
 
+  useEffect(() => {
+    //Zum einstellen der Coordinaten des ausgewählten Landes
+    const selectedCountry = countries.find(
+      (country) => country.code === filter.countrycode
+    );
+    if (selectedCountry && selectedCountry.coords) {
+      setMapView({ coords: selectedCountry.coords, zoom: 5 });
+    } else {
+      setMapView(initialMapView);
+    }
+  }, [filter.countrycode]);
+
   return (
     <RadioContext.Provider
       value={{
@@ -89,6 +110,7 @@ export const RadioProvider = ({ children }) => {
         addFavorite,
         removeFavorite,
         isFavorite,
+        mapView,
       }}
     >
       {children}

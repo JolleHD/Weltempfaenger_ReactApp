@@ -1,5 +1,5 @@
 const countries = [
-  { code: "", name: "All Countries" },
+  { code: "", name: "All Countries", coord: [0, 0] },
   { code: "AR", name: "Argentina", coords: [-38.4161, -63.6167] },
   { code: "AS", name: "American Samoa", coords: [-14.271, -170.132] },
   { code: "AT", name: "Austria", coords: [47.5162, 14.5501] },

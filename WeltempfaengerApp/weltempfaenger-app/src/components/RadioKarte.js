@@ -1,6 +1,6 @@
 // src/RadioKarte.js
-import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import React, { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
@@ -34,6 +34,19 @@ const customIcon = L.divIcon({
   iconAnchor: [12, 24],
 });
 
+const MapUpdater = () => {
+  const { mapView } = useRadio();
+  const map = useMap();
+
+  useEffect(() => {
+    if (mapView) {
+      map.flyTo(mapView.coords, mapView.zoom);
+    }
+  }, [mapView, map]);
+
+  return null;
+};
+
 const RadioKarte = () => {
   const { isError, isLoading, error, setCurrentStation, filteredStations } =
     useRadio(); //Custom Hook useRadio, damit werden die Sender gefetcht und der aktuelle Sender gesetzt
@@ -66,6 +79,7 @@ const RadioKarte = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
         />
+        <MapUpdater />
         <MarkerClusterGroup>
           {filteredStations.map(
             (station) =>

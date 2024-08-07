@@ -70,6 +70,18 @@
 }
 .expanded-content {
   margin-top: 10px;
+  max-height: 100px; /* Höhe des Bereichs mit scrollbaren Tags */
+  overflow-y: auto; /* Ermöglicht vertikales Scrollen */
+}
+
+.expanded-content::-webkit-scrollbar {
+  display: none;
+}
+
+.tags-container {
+  margin-bottom: 20px;
+  max-width: 230px;
+  display: grid;
 }
 
 .favorite {
@@ -90,8 +102,8 @@
 
 .favoriteToggle-button .filled,
 .favoriteToggle-button .unfilled {
-  width: 30px; /* Anpassung der Breite */
-  height: 30px; /* Anpassung der Höhe */
+  width: 40px; /* Anpassung der Breite */
+  height: 40px; /* Anpassung der Höhe */
 }
 
 .favoriteToggle-button .filled {

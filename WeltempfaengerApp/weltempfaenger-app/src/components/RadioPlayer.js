@@ -81,7 +81,9 @@ const RadioPlayer = () => {
           <div className="expanded-content">
             <p>Country: {currentStation.country}</p>
             <p>State: {currentStation.state}</p>
-            <p>Tags: {currentStation.tags}</p>
+            <div className="tags-container">
+              <p>Tags: {currentStation.tags} </p>
+            </div>
           </div>
         )}
       </div>

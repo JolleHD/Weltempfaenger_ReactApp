@@ -50,7 +50,7 @@ h1 {
   display: none;
 }
 
-.filter-select:hover {
+.filter-select:active {
   background-color: #cf1820;
 }
 

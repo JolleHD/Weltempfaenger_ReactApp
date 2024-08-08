@@ -9,7 +9,6 @@ const Stationpage = () => {
     isError,
     isLoading,
     error,
-    currentStation,
     setCurrentStation,
     filter,
     setFilter,

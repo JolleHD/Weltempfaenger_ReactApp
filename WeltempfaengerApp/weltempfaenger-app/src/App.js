@@ -1,5 +1,4 @@
 import "./App.css";
-import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Stationpage from "./components/Stationpage";
@@ -9,6 +8,7 @@ import FavoritesPage from "./components/FavoritesPage";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RadioPlayer from "./components/RadioPlayer";
+import { useRadio } from "./context/RadioContext";
 
 // Erstelle eine Instanz des QueryClient
 const queryClient = new QueryClient({
@@ -27,23 +27,33 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <RadioProvider>
           <Router>
-            <Navbar />
-            <div className="content">
-              <Routes>
-                <Route path="/" />
-                <Route path="/filter" element={<Stationpage />} />
-                <Route path="/favorites" element={<FavoritesPage />} />
-              </Routes>
-            </div>
-            <div className="map-container">
-              <RadioKarte />
-              <RadioPlayer />
-            </div>
+            <MainContent />
           </Router>
         </RadioProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </div>
+  );
+}
+
+function MainContent() {
+  const { isLoading } = useRadio(); // Jetzt innerhalb einer Komponente, die vom RadioProvider umschlossen ist - dadurch RadioPlayer und Sidebar erst anzeigen, wenn alles geladen ist (aufgeräumter Ladebildschirm)
+
+  return (
+    <>
+      {!isLoading && <Navbar />}
+      <div className="content">
+        <Routes>
+          <Route path="/" />
+          <Route path="/filter" element={<Stationpage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+        </Routes>
+      </div>
+      <div className="map-container">
+        <RadioKarte />
+        {!isLoading && <RadioPlayer />}
+      </div>
+    </>
   );
 }
 

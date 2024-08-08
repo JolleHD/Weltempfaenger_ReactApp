@@ -5,7 +5,7 @@ import { ReactComponent as HeartIcon } from "../assets/heart.svg";
 import * as Io5Icons from "react-icons/io5";
 
 const RadioPlayer = () => {
-  const { currentStation, addFavorite, removeFavorite, isFavorite } =
+  const { isLoading, currentStation, addFavorite, removeFavorite, isFavorite } =
     useRadio();
   const audioRef = useRef(null);
   const [muted, setMuted] = useState(false);

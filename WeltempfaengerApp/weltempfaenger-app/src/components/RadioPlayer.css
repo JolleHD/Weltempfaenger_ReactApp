@@ -92,7 +92,7 @@
 .favoriteToggle-button {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 3px;
   font-size: 20px;
   background-color: transparent;
   border: none;

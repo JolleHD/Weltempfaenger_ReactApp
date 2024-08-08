@@ -1,6 +1,6 @@
 // src/RadioKarte.js
 import React, { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
@@ -64,6 +64,7 @@ const RadioKarte = () => {
         </div>
       </div>
     );
+
   if (isError) return <p>{error.message}</p>;
 
   //Leaflet Map

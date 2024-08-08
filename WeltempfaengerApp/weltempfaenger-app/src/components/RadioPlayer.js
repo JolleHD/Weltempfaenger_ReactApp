@@ -51,12 +51,21 @@ const RadioPlayer = () => {
     }
   };
 
+  const truncateName = (name, maxLength) => {
+    if (name.length > maxLength) {
+      return name.slice(0, maxLength) + "...";
+    }
+    return name;
+  };
+
   return (
     <div className={`fixed-player ${isExpanded ? "expanded" : ""}`}>
       <div className="player-content">
         <div className="favorite">
           <h2 className="station-name">
-            {currentStation ? currentStation.name : "No Station Selected"}
+            {currentStation
+              ? truncateName(currentStation.name, 50)
+              : "No Station Selected"}
           </h2>
           {currentStation && (
             <button
@@ -79,10 +88,18 @@ const RadioPlayer = () => {
         <audio ref={audioRef} controls autoPlay hidden />
         {isExpanded && (
           <div className="expanded-content">
-            <p>Country: {currentStation.country}</p>
-            <p>State: {currentStation.state}</p>
+            <div className="name-container">
+              <p>
+                <b>Country</b>: {currentStation.country}
+              </p>
+            </div>
+            <p>
+              <b>State</b>: {currentStation.state}
+            </p>
             <div className="tags-container">
-              <p>Tags: {currentStation.tags} </p>
+              <p>
+                <b>Tags</b>: {currentStation.tags}{" "}
+              </p>
             </div>
           </div>
         )}

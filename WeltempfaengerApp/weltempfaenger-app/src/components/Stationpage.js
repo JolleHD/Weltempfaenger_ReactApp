@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRadio } from "../context/RadioContext";
 import { countries, languages, tags } from "../utils/filter";
 import "./Stationpage.css";
@@ -19,6 +19,7 @@ const Stationpage = () => {
   } = useRadio();
 
   const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
+  const containerRef = useRef(null);
 
   const handleSelectChange = (event, filterKey) => {
     setFilter({
@@ -36,6 +37,28 @@ const Stationpage = () => {
     setVisibleCount((prevCount) => prevCount + 100); // Anzahl der sichtbaren Sender um 100 erhöhen
   };
 
+  const handleScroll = () => {
+    //Überprüft ob das Ende des Scrollbaren Bereichs erreicht ist
+    if (containerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+      if (scrollTop + clientHeight >= scrollHeight - 5) {
+        loadMoreStations();
+      }
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll); //EventListener zum Überwachen des Scrollens
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [visibleCount, filteredStations]);
+
   const countryOptions = countries.map((country) => ({
     value: country.code,
     label: country.name,
@@ -52,7 +75,7 @@ const Stationpage = () => {
   })); //Geht alle tags, die in filter.js gesetzt sind, durch
 
   return (
-    <div className="stationpage">
+    <div className="stationpage" ref={containerRef}>
       <div className="content">
         <h1>Radiosender</h1>
         <div className="filters">
@@ -117,13 +140,6 @@ const Stationpage = () => {
                 </li>
               ))}
             </ul>
-            {visibleCount < filteredStations.length && (
-              <div className="load-more-button-container">
-                <button className="load-more-button" onClick={loadMoreStations}>
-                  Load More
-                </button>
-              </div>
-            )}
           </div>
         )}
       </div>

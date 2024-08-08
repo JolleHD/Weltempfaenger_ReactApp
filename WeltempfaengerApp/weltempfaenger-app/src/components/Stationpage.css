@@ -108,24 +108,3 @@ li button:hover {
   stroke: #fff; /* Farbe für das ungefüllte Herz */
   stroke-width: 2;
 }
-
-.load-more-button-container {
-  display: flex;
-  justify-content: center;
-}
-
-.load-more-button {
-  position: absolute;
-  bottom: 50px;
-  background-color: #ec6525;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
-}
-
-.load-more-button:hover {
-  background-color: #af368c;
-}

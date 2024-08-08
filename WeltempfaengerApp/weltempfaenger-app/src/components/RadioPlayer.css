@@ -23,6 +23,7 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
 .station-name {
   margin: 0;
   padding-right: 50px; /* Platz für das Herz-Icon */

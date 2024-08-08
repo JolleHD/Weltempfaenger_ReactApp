@@ -1,5 +1,5 @@
 const countries = [
-  { code: "", name: "All Countries", coord: [0, 0] },
+  { code: "", name: " All Countries", coord: [0, 0] },
   { code: "AR", name: "Argentina", coords: [-38.4161, -63.6167] },
   { code: "AS", name: "American Samoa", coords: [-14.271, -170.132] },
   { code: "AT", name: "Austria", coords: [47.5162, 14.5501] },
@@ -325,6 +325,8 @@ const countries = [
   { code: "ZW", name: "Zimbabwe", coords: [-19.015438, 29.154857] },
 ];
 
+countries.sort((a, b) => a.name.localeCompare(b.name));
+
 const languages = [
   { code: "", name: "All languages" },
   { code: "english", name: "English" },
@@ -445,14 +447,16 @@ const tags = [
   { code: "oldies", name: "Oldies" },
   { code: "méxico", name: "México" },
   { code: "public radio", name: "Public Radio" },
+  { code: "90s", name: "90s" },
   { code: "80s", name: "80s" },
+  { code: "70s", name: "70s" },
+  { code: "60s", name: "60s" },
   { code: "fm", name: "FM" },
   { code: "christian", name: "Christian" },
   { code: "jazz", name: "Jazz" },
   { code: "música", name: "Música" },
   { code: "classic hits", name: "Classic Hits" },
   { code: "pop music", name: "Pop Music" },
-  { code: "90s", name: "90s" },
   { code: "top 40", name: "Top 40" },
   { code: "electronic", name: "Electronic" },
   { code: "moi merino", name: "Moi Merino" },
@@ -469,7 +473,6 @@ const tags = [
   { code: "folk", name: "Folk" },
   { code: "alternative", name: "Alternative" },
   { code: "pop rock", name: "Pop Rock" },
-  { code: "70s", name: "70s" },
   { code: "mex", name: "Mex" },
   { code: "música pop", name: "Música Pop" },
   { code: "mx", name: "MX" },
@@ -524,7 +527,6 @@ const tags = [
   { code: "retro", name: "Retro" },
   { code: "world music", name: "World Music" },
   { code: "música del recuerdo", name: "Música del Recuerdo" },
-  { code: "60s", name: "60s" },
   { code: "top hits", name: "Top Hits" },
   { code: "trance", name: "Trance" },
   { code: "edm", name: "EDM" },

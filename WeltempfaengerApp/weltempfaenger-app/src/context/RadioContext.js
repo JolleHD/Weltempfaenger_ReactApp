@@ -21,6 +21,14 @@ export const RadioProvider = ({ children }) => {
     tags: "",
   }); // Zustand für das Filterobjekt
 
+  const resetFilter = () => { //Filter Zurücksetzen (Für Home Button)
+    setFilter({
+      countrycode: '',
+      language: '',
+      tags: '',
+    });
+  };
+
   const initialMapView = {
     //Ursprüngliche Kartenansicht
     coords: [0, 0],
@@ -105,6 +113,7 @@ export const RadioProvider = ({ children }) => {
         setCurrentStation,
         filter,
         setFilter,
+        resetFilter,
         filteredStations,
         favorites,
         addFavorite,

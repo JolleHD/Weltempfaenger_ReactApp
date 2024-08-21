@@ -1,4 +1,5 @@
 import "./App.css";
+import React, {useEffect} from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Stationpage from "./components/Stationpage";
@@ -9,6 +10,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RadioPlayer from "./components/RadioPlayer";
 import { useRadio } from "./context/RadioContext";
+import { useNavigate } from "react-router-dom";
 
 // Erstelle eine Instanz des QueryClient
 const queryClient = new QueryClient({
@@ -20,6 +22,7 @@ const queryClient = new QueryClient({
     },
   },
 });
+
 
 function App() {
   return (
@@ -37,7 +40,36 @@ function App() {
 }
 
 function MainContent() {
-  const { isLoading } = useRadio(); // Jetzt innerhalb einer Komponente, die vom RadioProvider umschlossen ist - dadurch RadioPlayer und Sidebar erst anzeigen, wenn alles geladen ist (aufgeräumter Ladebildschirm)
+  const { isLoading, resetFilter } = useRadio(); // Jetzt innerhalb einer Komponente, die vom RadioProvider umschlossen ist - dadurch RadioPlayer und Sidebar erst anzeigen, wenn alles geladen ist (aufgeräumter Ladebildschirm)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const socket = new WebSocket("ws://localhost:8765");
+
+    socket.onopen = function(event) {
+      console.log("Websocket connection established");
+    }
+  
+    socket.onmessage = function(event) {
+      if (event.data === "home_button_pressed") {
+        handleHomeButtonPress(); // Diese Funktion wird ausgelöst, wenn der Button gedrückt wird
+      }
+    };
+  
+    socket.onclose = function() {
+      console.log("WebSocket connection closed");
+    };
+  
+    return () => {
+      socket.close(); // WebSocket-Verbindung schließen, wenn die Komponente unmountet
+    };
+  }, [navigate]);
+  
+  const handleHomeButtonPress = () => {
+    navigate("/"); // Navigiert zur Startseite (Home)
+
+    resetFilter(); //Filter zurücksetzen
+  };
 
   return (
     <>

@@ -40,7 +40,7 @@ function App() {
 }
 
 function MainContent() {
-  const { isLoading, resetFilter } = useRadio(); // Jetzt innerhalb einer Komponente, die vom RadioProvider umschlossen ist - dadurch RadioPlayer und Sidebar erst anzeigen, wenn alles geladen ist (aufgeräumter Ladebildschirm)
+  const { isLoading, resetFilter, setScrollMessage } = useRadio(); // Jetzt innerhalb einer Komponente, die vom RadioProvider umschlossen ist - dadurch RadioPlayer und Sidebar erst anzeigen, wenn alles geladen ist (aufgeräumter Ladebildschirm)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,6 +53,10 @@ function MainContent() {
     socket.onmessage = function(event) {
       if (event.data === "home_button_pressed") {
         handleHomeButtonPress(); // Diese Funktion wird ausgelöst, wenn der Button gedrückt wird
+      } else if (event.data === "scroll down") {
+        handleScroll("down"); // Scrollen nach unten
+      } else if (event.data === "scroll up") {
+        handleScroll("up"); // Scrollen nach oben
       }
     };
   
@@ -67,8 +71,19 @@ function MainContent() {
   
   const handleHomeButtonPress = () => {
     navigate("/"); // Navigiert zur Startseite (Home)
-
+    console.log("Home Button pressed")
     resetFilter(); //Filter zurücksetzen
+  };
+
+  const handleScroll = (direction) => {
+    if (direction === "down") {
+      setScrollMessage("down");
+      console.log("down");
+    } else if (direction === "up"){
+      window.scrollBy(0, -50);
+      setScrollMessage("up");
+      console.log("up");
+    }
   };
 
   return (

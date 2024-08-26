@@ -21,6 +21,8 @@ export const RadioProvider = ({ children }) => {
     tags: "",
   }); // Zustand für das Filterobjekt
 
+  const [scrollMessage, setScrollMessage] = useState(""); //Setzen der Scroll-Nachricht 
+
   const resetFilter = () => { //Filter Zurücksetzen (Für Home Button)
     setFilter({
       countrycode: '',
@@ -28,6 +30,8 @@ export const RadioProvider = ({ children }) => {
       tags: '',
     });
   };
+
+
 
   const initialMapView = {
     //Ursprüngliche Kartenansicht
@@ -115,6 +119,8 @@ export const RadioProvider = ({ children }) => {
         setFilter,
         resetFilter,
         filteredStations,
+        scrollMessage,
+        setScrollMessage,
         favorites,
         addFavorite,
         removeFavorite,

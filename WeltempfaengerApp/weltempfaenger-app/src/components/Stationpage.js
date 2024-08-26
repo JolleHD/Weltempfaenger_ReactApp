@@ -16,6 +16,8 @@ const Stationpage = () => {
     addFavorite,
     removeFavorite,
     isFavorite,
+    scrollMessage,
+    setScrollMessage,
   } = useRadio();
 
   const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
@@ -47,6 +49,7 @@ const Stationpage = () => {
     }
   };
 
+
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
@@ -58,6 +61,16 @@ const Stationpage = () => {
       }
     };
   }, [visibleCount, filteredStations]);
+
+  useEffect(() => {
+    if (scrollMessage === "down" && containerRef.current){
+      containerRef.current.scrollBy(0, 50);
+      setScrollMessage("");
+    } else if (scrollMessage === "up" && containerRef.current){
+      containerRef.current.scrollBy(0, -50);
+      setScrollMessage("");
+    }
+  }, [scrollMessage, setScrollMessage]);
 
   const countryOptions = countries.map((country) => ({
     value: country.code,

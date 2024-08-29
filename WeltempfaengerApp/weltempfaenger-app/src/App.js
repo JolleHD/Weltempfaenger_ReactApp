@@ -57,6 +57,8 @@ function MainContent() {
         handleScroll("down"); // Scrollen nach unten
       } else if (event.data === "scroll up") {
         handleScroll("up"); // Scrollen nach oben
+      } else if (event.data === "select") {
+        handleScroll("select"); // Selektieren
       }
     };
   
@@ -83,6 +85,9 @@ function MainContent() {
       window.scrollBy(0, -50);
       setScrollMessage("up");
       console.log("up");
+    } else if (direction === "select") {
+      setScrollMessage("select");
+      console.log("select");
     }
   };
 

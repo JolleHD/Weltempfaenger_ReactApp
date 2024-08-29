@@ -72,7 +72,7 @@ ul::after {
   height: 90px; /* Platz am Ende der Liste */
 }
 
-li {
+.station-select {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -80,9 +80,22 @@ li {
   margin-bottom: 10px;
   background-color: #ec6525;
   border-radius: 5px;
+  box-sizing: border-box;
+  border: 3px solid transparent;
 }
 
-li button {
+.station-select:hover {
+  color: #af368c;
+  cursor: pointer;
+  border: 3px dotted #af368c;
+}
+
+.station-select.selected {
+  background-color: #af368c;
+  border: 3px dotted #cf1820;
+}
+
+.station-select button {
   background: none;
   border: none;
   color: #fff;
@@ -90,7 +103,7 @@ li button {
   font-size: 16px;
 }
 
-li button:hover {
+.station-select button:hover {
   color: #af368c;
 }
 

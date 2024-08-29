@@ -21,6 +21,7 @@ const Stationpage = () => {
   } = useRadio();
 
   const [visibleCount, setVisibleCount] = useState(100); // Anzahl der anfangs sichtbaren Sender
+  const [selectedIndex, setSelectedIndex] = useState(0); // Index des ausgewählten Elements
   const containerRef = useRef(null);
 
   const handleSelectChange = (event, filterKey) => {
@@ -63,15 +64,33 @@ const Stationpage = () => {
   }, [visibleCount, filteredStations]);
 
   useEffect(() => {
-    if (scrollMessage === "down" && containerRef.current){
-      containerRef.current.scrollBy(0, 50);
-      setScrollMessage("");
-    } else if (scrollMessage === "up" && containerRef.current){
-      containerRef.current.scrollBy(0, -50);
-      setScrollMessage("");
+    if (scrollMessage === "down" && selectedIndex < filteredStations.length -1){
+      setSelectedIndex((prevIndex) => prevIndex + 1);
+    } else if (scrollMessage === "up" && selectedIndex > 0){
+      setSelectedIndex((prevIndex) => prevIndex - 1);
+    } else if (scrollMessage === "select") {
+      const selectedStation = filteredStations[selectedIndex];
+      handleStationClick(selectedStation);
     }
-  }, [scrollMessage, setScrollMessage]);
+    setScrollMessage(""); //Scroll Message zurücksetzen
+  }, [scrollMessage, setScrollMessage, selectedIndex, filteredStations.length]);
 
+  useEffect(() => {
+    if (containerRef.current) {
+      const selectedItem = containerRef.current.querySelector(
+        `.station-select:nth-child(${selectedIndex + 1})`
+      );
+      if (selectedItem) {
+        selectedItem.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }
+
+   
+  }, [selectedIndex]);
+  
   const countryOptions = countries.map((country) => ({
     value: country.code,
     label: country.name,
@@ -134,8 +153,10 @@ const Stationpage = () => {
           <div>
             <ul>
               {filteredStations.slice(0, visibleCount).map((station, index) => (
-                <li key={index}>
-                  <button onClick={() => handleStationClick(station)}>
+                <li className={`station-select ${
+                  index === selectedIndex ? "selected" : ""
+                }`} key={index} onClick={() => handleStationClick(station)}>
+                  <button>
                     {station.name}
                   </button>
                   <button

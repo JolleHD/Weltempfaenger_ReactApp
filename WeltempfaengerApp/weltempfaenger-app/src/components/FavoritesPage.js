@@ -23,8 +23,8 @@ const FavoritesPage = () => {
       ) : (
         <ul>
           {favorites.map((station, index) => (
-            <li key={index}>
-              <button onClick={() => handleStationClick(station)}>
+            <li className="station-select" key={index} onClick={() => handleStationClick(station)}>
+              <button>
                 {station.name}
               </button>
               <button
